@@ -16,7 +16,7 @@ $handle = opendir(REPORTDIR);
 $group = ["-"];
 while (false !== ($entry = readdir($handle))) {
 	if ($entry != "." and $entry != "..") {
-	  if (is_dir(REPORTDIR . $entry)){
+	  if (is_dir(REPORTDIR . SUBUNPUBLISHED . $entry)){
 	    array_push($group, $entry);
 	  }
         }
@@ -33,7 +33,7 @@ if(isset($_GET['file'])){
   if (in_array($_GET['organ'], $group)){ //input validation
     $organ = $_GET['organ'];
     //show unpublished reports
-    $folder = REPORTDIR . $organ . '/' . SUBUNPUBLISHED;
+    $folder = REPORTDIR . SUBUNPUBLISHED . $organ . '/' ;
     $handle = opendir($folder);
     while (false !== ($entry = readdir($handle))) {
 	if ($entry == $_GET['file']) {

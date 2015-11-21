@@ -32,7 +32,7 @@ if(isset($_POST['group'])){
   if (in_array($_POST['group'], $group)){ //input validation
     $searchGroup = $_POST['group'];
     //show unpublished reports
-    $folder = REPORTDIR . $searchGroup . '/' . SUBUNPUBLISHED;
+    $folder = REPORTDIR . SUBUNPUBLISHED. $searchGroup . '/';
     $handle = opendir($folder);
     $unpublishedReports = [];
     while (false !== ($entry = readdir($handle))) {
@@ -42,7 +42,7 @@ if(isset($_POST['group'])){
 	  }
         }
     }
-    $folder = REPORTDIR . $searchGroup . '/' . SUBPUBLISHED;
+    $folder = REPORTDIR . SUBPUBLISHED . $searchGroup . '/' ;
     $handle = opendir($folder);
     $publishedReports = [];
     while (false !== ($entry = readdir($handle))) {
@@ -57,13 +57,6 @@ if(isset($_POST['group'])){
     $smarty->assign('pubRep', $publishedReports);
 
   }
-}
-
-
-if (false){
-	    $cmd = "pandoc $folder$entry -f markdown -t html -s -o test.html";
-	    exec($cmd);
-
 }
 
 $smarty->display('index.tpl');
