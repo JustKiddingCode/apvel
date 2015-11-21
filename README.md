@@ -9,7 +9,7 @@ APVEL uses EpicEditor and pandoc.
 
 File structure
 
-For each organisation WHERE is:
+For each organisation there is this file structure:
 
 REPORT/ORGANISATION/PUBLISHED/
 REPORT/ORGANISATION/UNPUBLISHED/
