@@ -18,7 +18,7 @@
      <form action="edit.php" method="POST">
       <input type="text"  name="organ" value="{$organ}" style="visibility:hidden;">
       <input type="text"  name="file" value="{$file}" style="visibility:hidden;">
-      <textarea name="text" id="epicedit" style="visibility:hidden;"> {$text}</textarea>
+      <textarea name="text" id="epicedit" style="visibility:hidden;">{$text}</textarea>
       <button type="submit" >Ändern</button>
     </form>
 
