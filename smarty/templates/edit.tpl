@@ -10,7 +10,8 @@
   </head>
   <body>
     <h1> AStA Protokoll Veröffentlichungs und Editier Lösung </h1>
-    <h2> Editing: {$organ} {$file}
+    <h2> Editing: {$organ} {$file} </h2>
+    <br/> <a href="index.php"> Back </a>
 
     <div id="epiceditor"> </div>
 

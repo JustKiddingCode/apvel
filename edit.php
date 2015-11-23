@@ -35,8 +35,6 @@ if(isset($_GET['file'])){
 	  $text = fread($file, filesize($folder.$entry));
 	  fclose($file);
 	  $smarty->assign('text', $text);
-
-
 	  $smarty->assign('organ', $organ);
 	  $smarty->assign('file', $_GET['file']);
         }
@@ -54,6 +52,7 @@ if(isset($_POST['text'])) { //save changes
     while (false !== ($entry = readdir($handle))) {
 	if ($entry == $_POST['file']) {
 	  $file = fopen($folder.$entry, "w") or die("File error");
+	  fwrite($file, $_POST['text']);
 	  fclose($file);
 	  $smarty->assign('text', $_POST['text']);
 	  $smarty->assign('organ', $organ);
