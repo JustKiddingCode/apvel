@@ -22,6 +22,8 @@
       <button type="submit" >Ändern</button>
     </form>
 
+    <a href="publish.php?file={$file}&amp;organ={$organ}" > Publish (preview) </a>
+
     <script type="text/javascript">
       var opts = {
         basePath: 'EpicEditor/epiceditor',

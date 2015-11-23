@@ -44,7 +44,7 @@ Organ auswählen:
 
       <h2>Veröffentlichte Protokolle </h2>
       <ol>{foreach from=$pubRep item=rep}
-        <li><a href="show.php?file={$rep}&amp;organ={$organ}">{$rep} </a> </li>
+        <li><a href="reports/published/{$organ}/{$rep}">{$rep} </a> </li>
       {/foreach}</ol>
     {/if}
   </body>

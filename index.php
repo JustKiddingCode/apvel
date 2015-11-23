@@ -30,7 +30,7 @@ if(isset($_POST['group'])){
     $handle = opendir($folder);
     $unpublishedReports = [];
     while (false !== ($entry = readdir($handle))) {
-	if ($entry != "." and $entry != "..") {
+	if ($entry != "." and $entry != ".." ) {
 	  if (is_file($folder.$entry)){
 	    array_push($unpublishedReports, $entry);
 	  }
@@ -40,7 +40,7 @@ if(isset($_POST['group'])){
     $handle = opendir($folder);
     $publishedReports = [];
     while (false !== ($entry = readdir($handle))) {
-	if ($entry != "." and $entry != "..") {
+	if ($entry != "." and $entry != ".."  and endsWith($entry, ".md.html")) {
 	  if (is_file($folder.$entry)){
 	    array_push($publishedReports, $entry);
 	  }
