@@ -11,10 +11,10 @@ File structure
 
 For each organisation there is this file structure:
 
-REPORT/ORGANISATION/PUBLISHED/
-REPORT/ORGANISATION/UNPUBLISHED/
+REPORT/PUBLISHED/ORGANISATION/
+REPORT/UNPUBLISHED/ORGANISATION/
 
-if a published report is requested it is first converted to html and then saved in FILE.md.html (uses same file name)
+If a published report is requested it is first converted to html and then saved in FILE.md.html (uses same file name)
 UNPUBLISHED folders should have an .htaccess file to exclude users
 
 It is possible to create git submodules for each group
