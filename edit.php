@@ -23,8 +23,6 @@ $smarty->assign('groups', $group);
 
 
 //post /get?
-
-
 if(isset($_GET['file'])){
   if (in_array($_GET['organ'], $group)){ //input validation
     $organ = $_GET['organ'];
@@ -36,16 +34,35 @@ if(isset($_GET['file'])){
 	  $file = fopen($folder.$entry, "r") or die("File error");
 	  $text = fread($file, filesize($folder.$entry));
 	  fclose($file);
-	  $text = str_replace("\n", "\\n", $text);
 	  $smarty->assign('text', $text);
+
+
+	  $smarty->assign('organ', $organ);
+	  $smarty->assign('file', $_GET['file']);
         }
     }
-    $smarty->assign('unPubRep', $unpublishedReports);
 
   }
 }
 
+if(isset($_POST['text'])) { //save changes
+  if (in_array($_POST['organ'], $group)){ //input validation
+    $organ = $_POST['organ'];
+        //show unpublished reports
+    $folder = REPORTDIR . SUBUNPUBLISHED . $organ . '/' ;
+    $handle = opendir($folder);
+    while (false !== ($entry = readdir($handle))) {
+	if ($entry == $_POST['file']) {
+	  $file = fopen($folder.$entry, "w") or die("File error");
+	  fclose($file);
+	  $smarty->assign('text', $_POST['text']);
+	  $smarty->assign('organ', $organ);
+	  $smarty->assign('file', $_POST['file']);
+        }
+    }
 
+  }
+}
 
 
 $smarty->display('edit.tpl');
