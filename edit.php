@@ -3,6 +3,9 @@
 // put full path to Smarty.class.php
 require('smarty3/Smarty.class.php');
 require('defines.php');
+require('lib.php');
+
+
 $smarty = new Smarty();
 
 $smarty->setTemplateDir('smarty/templates');
@@ -13,14 +16,7 @@ $smarty->setConfigDir('smarty/configs');
 $handle = opendir(REPORTDIR);
 
 
-$group = ["-"];
-while (false !== ($entry = readdir($handle))) {
-	if ($entry != "." and $entry != "..") {
-	  if (is_dir(REPORTDIR . SUBUNPUBLISHED . $entry)){
-	    array_push($group, $entry);
-	  }
-        }
-}
+$group = getOrgans();
 $smarty->assign('groups', $group);
 
 

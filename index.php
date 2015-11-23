@@ -3,6 +3,7 @@
 // put full path to Smarty.class.php
 require('smarty3/Smarty.class.php');
 require('defines.php');
+require('lib.php');
 
 $smarty = new Smarty();
 
@@ -12,27 +13,20 @@ $smarty->setCompileDir('smarty/templates_c');
 $smarty->setCacheDir('smarty/cache');
 $smarty->setConfigDir('smarty/configs');
 
-$handle = opendir(REPORTDIR);
 
-//Get groups (fsk, aera, ...)
-$group = ["-"];
-while (false !== ($entry = readdir($handle))) {
-	if ($entry != "." and $entry != "..") {
-	  if (is_dir(REPORTDIR . $entry)){
-	    array_push($group, $entry);
-	  }
-        }
-}
-$smarty->assign('groups', $group);
+
+$groups = getOrgans();
+$smarty->assign('groups', $groups);
 
 
 //post/get?
 
 if(isset($_POST['group'])){
-  if (in_array($_POST['group'], $group)){ //input validation
+  if (in_array($_POST['group'], $groups)){ //input validation
     $searchGroup = $_POST['group'];
     //show unpublished reports
     $folder = REPORTDIR . SUBUNPUBLISHED. $searchGroup . '/';
+    if (! is_dir($folder)) die("Wrong folder structure: " . $folder);
     $handle = opendir($folder);
     $unpublishedReports = [];
     while (false !== ($entry = readdir($handle))) {
