@@ -12,7 +12,7 @@
 
   </head>
   <body>
-    <h1> AStA Protokoll Veröffentlichungs und Editier L </h1>
+    <h1> AStA Protokoll Veröffentlichungs und Editier Lösung </h1>
 Organ auswählen:
     <form action="index.php" method="POST">
       <select name="group" size="1">
@@ -23,6 +23,7 @@ Organ auswählen:
       <button type="submit" >Ändern</button>
     </form>
 
+    <h2> Neues Protokoll hinzufügen </h2>
 
     <form action="create.php" method="POST">
       <select name="organ" size="1">
@@ -34,14 +35,16 @@ Organ auswählen:
       <button type="submit" >Neu anlegen</button>
     </form>
 
-    <h2>Unveröffentlichte Protokolle </h2>
-    {foreach from=$unPubRep item=rep}
-      <a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a>
-    {/foreach}
+    {if isset($organ)}
+      <h2>Unveröffentlichte Protokolle </h2>
+      {foreach from=$unPubRep item=rep}
+	<a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a>
+      {/foreach}
 
-    <h2>Veröffentlichte Protokolle </h2>
-    {foreach from=$pubRep item=rep}
-      <a href="show.php?file={$rep}&amp;organ={$organ}">{$rep} </a>
-    {/foreach}
+      <h2>Veröffentlichte Protokolle </h2>
+      {foreach from=$pubRep item=rep}
+	<a href="show.php?file={$rep}&amp;organ={$organ}">{$rep} </a>
+      {/foreach}
+    {/if}
   </body>
 </html>

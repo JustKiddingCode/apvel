@@ -9,21 +9,26 @@
 
   </head>
   <body>
-    <h1> AStA Protokoll Veröffentlichungs und Editier L </h1>
-Organ auswählen:
-    <select name="group" size="1">
-      {foreach from=$groups item=group}
-        <option>{$group}</option>
-      {/foreach}
-    </select>
+    <h1> AStA Protokoll Veröffentlichungs und Editier Lösung </h1>
+    <h2> Editing: {$organ} {$file}
+
     <div id="epiceditor"> </div>
+
+     <form action="edit.php" method="POST">
+      <input type="text"  name="organ" value="{$organ}" style="visibility:hidden;">
+      <input type="text"  name="file" value="{$file}" style="visibility:hidden;">
+      <textarea name="text" id="epicedit" style="visibility:hidden;"> {$text}</textarea>
+      <button type="submit" >Ändern</button>
+    </form>
+
     <script type="text/javascript">
       var opts = {
-        basePath: 'EpicEditor/epiceditor'
-
+        basePath: 'EpicEditor/epiceditor',
+        textarea: 'epicedit'
       }
       var editor = new EpicEditor(opts).load();
-      editor.importFile('test', "{$text}");
     </script>
+
+
   </body>
 </html>
