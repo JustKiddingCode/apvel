@@ -37,14 +37,15 @@ Organ auswählen:
 
     {if isset($organ)}
       <h2>Unveröffentlichte Protokolle </h2>
-      {foreach from=$unPubRep item=rep}
-	<a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a>
+       <ol>{foreach from=$unPubRep item=rep}
+	<li><a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a></li>
       {/foreach}
+       </ol>
 
       <h2>Veröffentlichte Protokolle </h2>
-      {foreach from=$pubRep item=rep}
-	<a href="show.php?file={$rep}&amp;organ={$organ}">{$rep} </a>
-      {/foreach}
+      <ol>{foreach from=$pubRep item=rep}
+        <li><a href="show.php?file={$rep}&amp;organ={$organ}">{$rep} </a> </li>
+      {/foreach}</ol>
     {/if}
   </body>
 </html>
