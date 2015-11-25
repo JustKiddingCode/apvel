@@ -6,13 +6,23 @@
     <meta name="description" content="EpicEditor is an embeddable JavaScript Markdown editor with split fullscreen editing, live previewing, automatic draft saving, offline support, and more.">
 
     <script type="text/javascript" src="EpicEditor/epiceditor/js/epiceditor.min.js" > </script>
+    <script type="text/javascript">
+      function getWritePermission() {
+	myAjax = new XMLHttpRequest();
+	myAjax.open("GET", "getLock.php?organ={$file}&amp;file={$file}", true);
+	myAjax.send();
+      }
 
+    </script>
   </head>
   <body>
     <h1> AStA Protokoll Veröffentlichungs und Editier Lösung </h1>
     <h2> Editing: {$organ} {$file} </h2>
     <br/> <a href="index.php"> Back </a>
-
+    <div id="lock">
+      <a href="javascript:getWritePermission()">Get write permission</a>
+      <p id="locktext">Hier kommt der Lock Text rein</p>
+    </div>
     <div id="epiceditor"> </div>
 
      <form action="edit.php" method="POST">
