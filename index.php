@@ -24,17 +24,37 @@ $smarty->assign('organs', $organs);
 $user = "justkidding";
 $smarty->assign("user", $user);
 
-$smarty->assign("writeOnOrgan", true);
+
 
 
 //post/get?
+if (isset($_POST['withdraw'])){
+  if (array_key_exists($_POST['organ'], $organs)){ //input validation
+    $organ = $_POST['organ'];
+    if(in_array($user, $write[$organ])) { // permission check
+      $_POST['report']; // should be YYYY-MM-DD.md.html
+      $regex = ',[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-2][0-9]\.md\.html,';
+      if (filter_var($_POST['report'], FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>$regex)))) {
+        $parts = explode(".", $_POST['report']);
+	$mdfile = REPORTDIR.SUBPUBLISHED.$organ."/".$parts[0].".".$parts[1];
+	$htmlfile = $mdfile.".html";
+	$pdffile = $mdfile.".pdf";
 
-if(isset($_POST['group'])){
-  if (array_key_exists($_POST['group'], $organs)){ //input validation
+	rename($mdfile, REPORTDIR . SUBUNPUBLISHED.  $organ . "/" . $parts[0].".".$parts[1]);
+	unlink($htmlfile);
+	unlink($pdffile);
+      }
+    }
+  }
+}
+if(isset($_POST['organ'])){
+  if (array_key_exists($_POST['organ'], $organs)){ //input validation
     //show unpublished reports?
+    $searchGroup = $_POST['organ'];
     $smarty->assign("showUnpublishedReports", in_array($user, $read[$searchGroup]));
+    $smarty->assign("writeOnOrgan", $write[$searchGroup]);
 
-    $searchGroup = $_POST['group'];
+
     //show unpublished reports
     $folder = REPORTDIR . SUBUNPUBLISHED. $searchGroup . '/';
     if (! is_dir($folder)) die("Wrong folder structure: " . $folder);

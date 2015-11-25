@@ -20,7 +20,7 @@
     <div id="mainOrganSelector">
 Organ auswählen:
     <form action="index.php" method="POST">
-      <select name="group" size="1">
+      <select name="organ" size="1">
         {foreach key=slang item=name from=$organs}
           <option value="{$slang}">{$name}</option>
         {/foreach}
@@ -28,8 +28,9 @@ Organ auswählen:
       <button type="submit" >Ändern</button>
     </form>
     </div>
+    {if isset($organ)}<h2>{$organs[$organ]}</h2>{/if}
     {if $writeOnOrgan}
-      <h2> Neues Protokoll hinzufügen </h2>
+      <h3> Neues Protokoll hinzufügen </h3>
 
       <form action="create.php" method="POST">
         <select name="organ" size="1">
@@ -43,16 +44,26 @@ Organ auswählen:
     {/if}
 
     {if $showUnpublishedReports}
-      <h2>Unveröffentlichte Protokolle </h2>
+      <h3>Unveröffentlichte Protokolle </h3>
        <ol>{foreach from=$unPubRep item=rep}
-	<li><a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a></li>
+	<li><a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a>
+	</li>
       {/foreach}
        </ol>
     {/if}
     {if isset($organ)}
-      <h2>Veröffentlichte Protokolle </h2>
+      <h3>Veröffentlichte Protokolle </h3>
       <ol>{foreach from=$pubRep item=rep}
-        <li><a href="reports/published/{$organ}/{$rep}">{$rep} </a> </li>
+        <li><a href="reports/published/{$organ}/{$rep}">{$rep} </a>
+        	{if $writeOnOrgan}
+		  <form action="index.php" method="post">
+		    <input type="text" name="withdraw" style="visibility:hidden;width:0em;">
+		    <input type="text" name="organ" value="{$organ}" style="visibility:hidden;width:0em;">
+		    <input type="text" name="report" value="{$rep}" style="visibility:hidden;width:0em;">
+		    <button type="text">Withdraw</button>
+		  </form>
+        	{/if}
+        </li>
       {/foreach}</ol>
     {/if}
   </body>
