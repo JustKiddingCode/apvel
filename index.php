@@ -4,6 +4,7 @@
 require('smarty3/Smarty.class.php');
 require('defines.php');
 require('lib.php');
+require('permissions.config.php');
 
 $smarty = new Smarty();
 
@@ -15,14 +16,24 @@ $smarty->setConfigDir('smarty/configs');
 
 
 
-$groups = getOrgans();
-$smarty->assign('groups', $groups);
+$organs = $organs;
+$smarty->assign('organs', $organs);
+
+
+//TODO: Real Authentification
+$user = "justkidding";
+$smarty->assign("user", $user);
+
+$smarty->assign("writeOnOrgan", true);
 
 
 //post/get?
 
 if(isset($_POST['group'])){
-  if (in_array($_POST['group'], $groups)){ //input validation
+  if (array_key_exists($_POST['group'], $organs)){ //input validation
+    //show unpublished reports?
+    $smarty->assign("showUnpublishedReports", in_array($user, $read[$searchGroup]));
+
     $searchGroup = $_POST['group'];
     //show unpublished reports
     $folder = REPORTDIR . SUBUNPUBLISHED. $searchGroup . '/';
@@ -47,6 +58,8 @@ if(isset($_POST['group'])){
         }
     }
     $smarty->assign('organ', $searchGroup);
+    $smarty->assign('currentOrganR', $read[$searchGroup]);
+
     $smarty->assign('unPubRep', $unpublishedReports);
     $smarty->assign('pubRep', $publishedReports);
 

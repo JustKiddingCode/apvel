@@ -9,6 +9,7 @@ function getOrgans() {
 	    }
 	  }
   }
+  sort($groups);
   return $groups;
 }
 
