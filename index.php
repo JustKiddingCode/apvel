@@ -61,7 +61,7 @@ if(isset($_POST['organ'])){
     $handle = opendir($folder);
     $unpublishedReports = [];
     while (false !== ($entry = readdir($handle))) {
-	if ($entry != "." and $entry != ".." ) {
+	if ($entry != "." and $entry != ".." and endsWith($entry, ".md")) {
 	  if (is_file($folder.$entry)){
 	    array_push($unpublishedReports, $entry);
 	  }
