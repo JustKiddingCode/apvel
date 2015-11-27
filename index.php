@@ -28,23 +28,18 @@ $smarty->assign("user", $user);
 
 
 //post/get?
-if (isset($_POST['withdraw'])){
-  if (array_key_exists($_POST['organ'], $organs)){ //input validation
+if (isset($_POST['withdraw']) && isset($_POST['organ'])){
+  if (checkOrgan($_POST['organ']) and checkWritePerms($user,$_POST['organ'])) { 
     $organ = $_POST['organ'];
-    if(in_array($user, $write[$organ])) { // permission check
-      $_POST['report']; // should be YYYY-MM-DD.md.html
-      $regex = ',[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-2][0-9]\.md\.html,';
-      if (filter_var($_POST['report'], FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>$regex)))) {
-        $parts = explode(".", $_POST['report']);
-	$mdfile = REPORTDIR.SUBPUBLISHED.$organ."/".$parts[0].".".$parts[1];
-	$htmlfile = $mdfile.".html";
-	$pdffile = $mdfile.".pdf";
+    $mdfile = substr($_POST['report'], 0, -5);
+    if (checkFileName($mdfile))
+	$mdpath = REPORTDIR.SUBPUBLISHED.$_POST['organ']."/" . $mdfile;
+	$htmlpath = $mdfile.".html";
+	$pdfpath = $mdfile.".pdf";
 
-	rename($mdfile, REPORTDIR . SUBUNPUBLISHED.  $organ . "/" . $parts[0].".".$parts[1]);
-	unlink($htmlfile);
-	unlink($pdffile);
-      }
-    }
+	rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_POST['organ'] . "/" . $mdfile);
+	unlink($htmlpath);
+	unlink($pdfpath);
   }
 }
 if(isset($_POST['organ'])){
@@ -77,6 +72,7 @@ if(isset($_POST['organ'])){
 	  }
         }
     }
+    
     $smarty->assign('organ', $searchGroup);
     $smarty->assign('currentOrganR', $read[$searchGroup]);
 
