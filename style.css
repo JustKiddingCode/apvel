@@ -6,5 +6,19 @@ body {width: 80%;
 #login {text-align: right; }
 #mainOrganSelector {text-align:right; width:15%;margin-left:auto; margin-right:0em;}
 
+#lock {float:left; width: 11.5em; }
+
+#publishFrame {float:left; text-align:right; width:12%}
+
+#sendmail {float:left; width: 6.6em; margin-left:31%; margin-right:31%; }
+
 h1 {text-align: center;}
 
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  color: #000000;
+  text-decoration: none;
+  padding:0.2em;
+}
