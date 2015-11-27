@@ -1,3 +1,6 @@
 [submodule "EpicEditor"]
 	path = EpicEditor
 	url = git@github.com:OscarGodson/EpicEditor.git
+[submodule "PHPMailer"]
+	path = PHPMailer
+	url = git@github.com:PHPMailer/PHPMailer.git
