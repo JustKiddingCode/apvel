@@ -5,7 +5,7 @@ APVEL
 APVEL (AStA Protokoll Veröffentlichungs- und Editier Lösung) is a tool to write reports of meetings from organisations.
 It is designed to edit simple Markdown Files and show HTML files or, if wanted PDF files.
 
-APVEL uses EpicEditor, pandoc and PHPMailer. Thanks for writing great programs!
+APVEL uses EpicEditor, pandoc, smarty and PHPMailer. Thanks for writing great programs!
 
 File structure
 
