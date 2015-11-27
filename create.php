@@ -6,7 +6,7 @@ if( isset ($_POST["organ"]) && isset ($_POST["date"])){
   print("isset test");
   if (filter_var($_POST['date'], FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>DATEREGEX)))) {
     $date = explode("/",$_POST['date']);
-    if (! in_array($_POST['organ'],getOrgans())){ //sanitize _POST
+    if (checkOrgan($_POST["organ"]))){ //sanitize _POST
       die("Invalid Organ!");
     }
     $filename = $date[0] . "-" . $date[1] . "-" . $date[2] . ".md";

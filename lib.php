@@ -1,17 +1,6 @@
 <?php
-function getOrgans() {
-  $groups = ["-"];
-  $handle = opendir(REPORTDIR . SUBPUBLISHED);
-  while (false !== ($entry = readdir($handle))) {
-	  if ($entry != "." and $entry != "..") {
-	    if (is_dir(REPORTDIR . SUBPUBLISHED . $entry)){
-	      array_push($groups, $entry);
-	    }
-	  }
-  }
-  sort($groups);
-  return $groups;
-}
+require_once('permissions.config.php');
+
 
 function endsWith($haystack,$needle,$case=true) {
         if($case){return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);}
@@ -24,12 +13,19 @@ function checkFilename($filename){
 }
 
 function checkOrgan($organ) {
-    return array_key_exists($organ, getOrgans());
+    global $organs;
+    return array_key_exists($organ, $organs);
 }
 
 function checkWritePerms($user, $organ) {
+    global $write;
     return in_array($user, $write[$organ]);
 }
+function checkReadPerms($user, $organ) {
+    global $read;
+    return in_array($user, $read[$organ]);
+}
+
 
 function writeIntoFile($text, $organ, $file) {
     $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;

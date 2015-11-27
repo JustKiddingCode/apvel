@@ -16,8 +16,7 @@ $smarty->setConfigDir('smarty/configs');
 $handle = opendir(REPORTDIR);
 
 
-$group = getOrgans();
-$smarty->assign('groups', $group);
+$smarty->assign('groups', $organs);
 
 /*
 Writes the text into the unpublished report.

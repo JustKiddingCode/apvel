@@ -4,7 +4,7 @@
 require('smarty3/Smarty.class.php');
 require('defines.php');
 require('lib.php');
-require('permissions.config.php');
+require_once('permissions.config.php');
 
 $smarty = new Smarty();
 
@@ -42,40 +42,37 @@ if (isset($_POST['withdraw']) && isset($_POST['organ'])){
 	unlink($pdfpath);
   }
 }
+
+function readDirIntoArray($folder, $endsFilter, & $arr) {
+    $handle = opendir($folder);
+    $arr = [];
+    while (false !== ($entry = readdir($handle))) {
+	if (endsWith($entry, $endsFilter)) {
+	    array_push($arr, $entry);
+        }
+    }
+}
 if(isset($_POST['organ'])){
-  if (array_key_exists($_POST['organ'], $organs)){ //input validation
+  if (checkOrgan($_POST['organ'])){ //input validation
+
     //show unpublished reports?
     $searchGroup = $_POST['organ'];
-    $smarty->assign("showUnpublishedReports", in_array($user, $read[$searchGroup]));
-    $smarty->assign("writeOnOrgan", $write[$searchGroup]);
+    $smarty->assign("showUnpublishedReports", checkReadPerms($user, $_POST['organ']));
+    $smarty->assign("writeOnOrgan", checkWritePerms($user, $_POST['organ']));
 
 
     //show unpublished reports
-    $folder = REPORTDIR . SUBUNPUBLISHED. $searchGroup . '/';
-    if (! is_dir($folder)) die("Wrong folder structure: " . $folder);
-    $handle = opendir($folder);
+    $folderPub = REPORTDIR . SUBPUBLISHED. $_POST['organ'] . '/';
+    $folderUnPub = REPORTDIR . SUBUNPUBLISHED. $_POST['organ'] . '/';
+    if (! is_dir($folderPub)) die("Wrong folder structure: " . $folderPub);
+    if (! is_dir($folderUnPub)) die("Wrong folder structure: " . $folderUnPub);
+    
     $unpublishedReports = [];
-    while (false !== ($entry = readdir($handle))) {
-	if ($entry != "." and $entry != ".." and endsWith($entry, ".md")) {
-	  if (is_file($folder.$entry)){
-	    array_push($unpublishedReports, $entry);
-	  }
-        }
-    }
-    $folder = REPORTDIR . SUBPUBLISHED . $searchGroup . '/' ;
-    $handle = opendir($folder);
-    $publishedReports = [];
-    while (false !== ($entry = readdir($handle))) {
-	if ($entry != "." and $entry != ".."  and endsWith($entry, ".md.html")) {
-	  if (is_file($folder.$entry)){
-	    array_push($publishedReports, $entry);
-	  }
-        }
-    }
+    readDirIntoArray($folderPub, ".md.html", $publishedReports);
+    readDirIntoArray($folderUnPub, ".md", $unpublishedReports);
+
     
     $smarty->assign('organ', $searchGroup);
-    $smarty->assign('currentOrganR', $read[$searchGroup]);
-
     $smarty->assign('unPubRep', $unpublishedReports);
     $smarty->assign('pubRep', $publishedReports);
 
