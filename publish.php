@@ -14,50 +14,48 @@ $smarty->setCompileDir('smarty/templates_c');
 $smarty->setCacheDir('smarty/cache');
 $smarty->setConfigDir('smarty/configs');
 
+function pandocToHTML($src, $to){ 
+    $cmd = "pandoc ". $src . " -f markdown -t html -s -o " . $to;
+    exec($cmd);
+}
 
-if(isset($_GET['file'])){
-  if (in_array($_GET['organ'], getOrgans())){ //input validation
+function pandocToPDF($src, $to){
+    $cmd = "pandoc ". $src . " -f markdown -o " . $to . ".pdf";
+    exec($cmd);
+}
+
+if(isset($_GET['file']) && isset($_GET['organ'])){
+  if (checkOrgan($_GET['organ']) && checkFilename($_GET['file'])) {
     $organ = $_GET['organ'];
-    //show unpublished reports
     $folder = REPORTDIR . SUBUNPUBLISHED . $organ . '/' ;
-    $handle = opendir($folder);
-    while (false !== ($entry = readdir($handle))) {
-	if ($entry == $_GET['file']) {
-	  $file = fopen($folder.$entry, "r") or die("File error");
-	  $text = fread($file, filesize($folder.$entry));
-	  fclose($file);
+    $path = $folder.$_GET['file'];
+    if (is_file($path)) {
+        $text = readFromFile($organ, $_GET['file']);
 
 	  //remove [intern][/intern]
 	  $regex = ";\[intern\](.*?)\[/intern\];s";
 	  $text = preg_replace($regex, "", $text);
 
 	  if (isset($_GET['rly'])){
-	    $cmd = "pandoc ". REPORTDIR . SUBUNPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . " -f markdown -t html -s -o " . REPORTDIR . SUBPUBLISHED . $_GET['organ'] . "/" . $_GET['file'] . ".html";
-	    exec($cmd);
-	    $cmd = "pandoc ". REPORTDIR . SUBUNPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . " -f markdown -o " . REPORTDIR . SUBPUBLISHED . $_GET['organ'] . "/" . $_GET['file'] . ".pdf";
-	    exec($cmd);
-
+            pandocToHTML($path, $path.".html");
+            pandocToPDF($path, $path.".pdf");
 
 	    //move markdown file
-	    rename(REPORTDIR . SUBUNPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'], REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
+	    rename($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
 
 	    header('Location: index.php');
 	    exit();
 	  } else {
-	    $tmp = tempnam("cache",$_GET['file']); //check this
+	    $tmp = tempnam("cache",$_GET['file']); 
             $filename = explode("/",$tmp);
 	    $filename = $filename[count($filename) -1];
-	    $cmd = "pandoc ". REPORTDIR . SUBUNPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . " -f markdown -t html -s -o cache/" . $filename . ".html";
-	    exec($cmd);
+	    pandocToHTML($path, "cache/".$filename.".html");
 	  }
-
-
-
 
 	  $smarty->assign('tmp', $filename);
 	  $smarty->assign('text', $text);
-	  $smarty->assign('organ', $organ);
-	  $smarty->assign('file', $entry);
+	  $smarty->assign('organ', $_GET['organ']);
+	  $smarty->assign('file', $_GET['file']);
         }
     }
   }

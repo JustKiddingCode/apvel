@@ -19,47 +19,45 @@ $handle = opendir(REPORTDIR);
 $group = getOrgans();
 $smarty->assign('groups', $group);
 
+/*
+Writes the text into the unpublished report.
+*/
+function writeIntoFile($text, $organ, $file) {
+    $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
+    if (is_file($path)) {
+        $file = fopen($folder.$entry, "w") or die("File error");
+	fwrite($file, $text);
+	fclose($file);
+    }
+}
 
-
+/* Read from file */
+function readFromFile($organ, $file) {
+    $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
+    if (is_file($path)) {
+        $file = fopen($path, "r") or die("File error");
+	$text = fread($file, filesize($path));
+	fclose($file);
+    }
+}
 
 //post /get?
-if(isset($_GET['file'])){
-  if (in_array($_GET['organ'], $group)){ //input validation
-    $organ = $_GET['organ'];
-    //show unpublished reports
-    $folder = REPORTDIR . SUBUNPUBLISHED . $organ . '/' ;
-    $handle = opendir($folder);
-    while (false !== ($entry = readdir($handle))) {
-	if ($entry == $_GET['file']) {
-	  $file = fopen($folder.$entry, "r") or die("File error");
-	  $text = fread($file, filesize($folder.$entry));
-	  fclose($file);
-	  $smarty->assign('text', $text);
-	  $smarty->assign('organ', $organ);
-	  $smarty->assign('file', $_GET['file']);
-        }
-    }
-
+if(isset($_GET['file']) && isset($_GET['organ'])){ // read file
+  if (checkOrgan($_GET['organ']) && checkFilename($_GET['file'])){ //input validation: get organ
+    $text = readFromFile($_GET['organ'], $_GET['file']);
+    $smarty->assign('text', $text);
+    $smarty->assign('organ', $_GET['organ']);
+    $smarty->assign('file', $_GET['file']);
   }
 }
 
-if(isset($_POST['text'])) { //save changes
-  if (in_array($_POST['organ'], $group)){ //input validation
-    $organ = $_POST['organ'];
-        //show unpublished reports
-    $folder = REPORTDIR . SUBUNPUBLISHED . $organ . '/' ;
-    $handle = opendir($folder);
-    while (false !== ($entry = readdir($handle))) {
-	if ($entry == $_POST['file']) {
-	  $file = fopen($folder.$entry, "w") or die("File error");
-	  fwrite($file, $_POST['text']);
-	  fclose($file);
-	  $smarty->assign('text', $_POST['text']);
-	  $smarty->assign('organ', $organ);
-	  $smarty->assign('file', $_POST['file']);
-        }
-    }
 
+if(isset($_POST['text']) and isset($_POST['organ']) and isset($_POST['file'])) { //save changes
+  if (checkFilename($_POST['file']) and checkOrgan($_POST['organ']) and checkWritePerms($user, $_POST['organ'])){
+    writeIntoFile($_POST['text'], $_POST['organ'], $_POST['file']);
+    $smarty->assign('text', $_POST['text']);
+    $smarty->assign('organ', $_POST['organ']);
+    $smarty->assign('file', $_POST['file']);
   }
 }
 
