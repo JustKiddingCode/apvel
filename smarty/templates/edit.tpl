@@ -27,7 +27,7 @@
 	<a class="button" href="publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
       </div>
     </div>
-    	<span id="locktext"></p>
+    	<span id="locktext"></span>
   <br>  <br> <br>  <br>
       <hr>
 
