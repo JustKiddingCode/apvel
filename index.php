@@ -29,13 +29,13 @@ $smarty->assign("user", $user);
 
 //post/get?
 if (isset($_POST['withdraw']) && isset($_POST['organ'])){
-  if (checkOrgan($_POST['organ']) and checkWritePerms($user,$_POST['organ'])) { 
+  if (checkOrgan($_POST['organ']) and checkWritePerms($user,$_POST['organ'])) {
     $organ = $_POST['organ'];
     $mdfile = substr($_POST['report'], 0, -5);
     if (checkFileName($mdfile))
 	$mdpath = REPORTDIR.SUBPUBLISHED.$_POST['organ']."/" . $mdfile;
-	$htmlpath = $mdfile.".html";
-	$pdfpath = $mdfile.".pdf";
+	$htmlpath = $mdpath.".html";
+	$pdfpath = $mdpath.".pdf";
 
 	rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_POST['organ'] . "/" . $mdfile);
 	unlink($htmlpath);
@@ -66,12 +66,12 @@ if(isset($_POST['organ'])){
     $folderUnPub = REPORTDIR . SUBUNPUBLISHED. $_POST['organ'] . '/';
     if (! is_dir($folderPub)) die("Wrong folder structure: " . $folderPub);
     if (! is_dir($folderUnPub)) die("Wrong folder structure: " . $folderUnPub);
-    
+
     $unpublishedReports = [];
     readDirIntoArray($folderPub, ".md.html", $publishedReports);
     readDirIntoArray($folderUnPub, ".md", $unpublishedReports);
 
-    
+
     $smarty->assign('organ', $searchGroup);
     $smarty->assign('unPubRep', $unpublishedReports);
     $smarty->assign('pubRep', $publishedReports);
