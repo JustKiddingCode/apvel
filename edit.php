@@ -18,28 +18,6 @@ $handle = opendir(REPORTDIR);
 
 $smarty->assign('groups', $organs);
 
-/*
-Writes the text into the unpublished report.
-*/
-function writeIntoFile($text, $organ, $file) {
-    $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
-    if (is_file($path)) {
-        $file = fopen($folder.$entry, "w") or die("File error");
-	fwrite($file, $text);
-	fclose($file);
-    }
-}
-
-/* Read from file */
-function readFromFile($organ, $file) {
-    $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
-    if (is_file($path)) {
-        $file = fopen($path, "r") or die("File error");
-	$text = fread($file, filesize($path));
-	fclose($file);
-    }
-}
-
 //post /get?
 if(isset($_GET['file']) && isset($_GET['organ'])){ // read file
   if (checkOrgan($_GET['organ']) && checkFilename($_GET['file'])){ //input validation: get organ
