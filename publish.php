@@ -14,16 +14,6 @@ $smarty->setCompileDir('smarty/templates_c');
 $smarty->setCacheDir('smarty/cache');
 $smarty->setConfigDir('smarty/configs');
 
-function pandocToHTML($src, $to){ 
-    $cmd = "pandoc ". $src . " -f markdown -t html -s -o " . $to;
-    exec($cmd);
-}
-
-function pandocToPDF($src, $to){
-    $cmd = "pandoc ". $src . " -f markdown -o " . $to . ".pdf";
-    exec($cmd);
-}
-
 if(isset($_GET['file']) && isset($_GET['organ'])){
   if (checkOrgan($_GET['organ']) && checkFilename($_GET['file'])) {
     $organ = $_GET['organ'];
@@ -46,7 +36,7 @@ if(isset($_GET['file']) && isset($_GET['organ'])){
 	    header('Location: index.php');
 	    exit();
 	  } else {
-	    $tmp = tempnam("cache",$_GET['file']); 
+	    $tmp = tempnam("cache",$_GET['file']);
             $filename = explode("/",$tmp);
 	    $filename = $filename[count($filename) -1];
 	    pandocToHTML($path, "cache/".$filename.".html");

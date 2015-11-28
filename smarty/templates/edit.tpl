@@ -19,7 +19,7 @@
 	<a class="button" href="javascript:refreshWritePermission('{$file}','{$organ}')">Get write permission</a>
       </div>
       <div id="sendmail" >
-	<a class="button" href="">Send email</a>
+	<a class="button" href="sendmail.php?file={$file}&amp;organ={$organ}">Send email</a>
       </div>
 
 
