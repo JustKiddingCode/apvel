@@ -1,6 +1,6 @@
 <?php
 require_once('permissions.config.php');
-
+require_once('PHPMailer/PHPMailerAutoload.php');
 
 function endsWith($haystack,$needle,$case=true) {
         if($case){return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);}
@@ -30,7 +30,7 @@ function checkReadPerms($user, $organ) {
 function writeIntoFile($text, $organ, $file) {
     $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
     if (is_file($path)) {
-        $file = fopen($folder.$entry, "w") or die("File error");
+        $file = fopen($path, "w") or die("File error");
 	fwrite($file, $text);
 	fclose($file);
     }
@@ -54,6 +54,57 @@ function pandocToHTML($src, $to){
 function pandocToPDF($src, $to){
     $cmd = "pandoc ". $src . " -f markdown -o " . $to . ".pdf";
     exec($cmd);
+}
+
+function rlyWriteEmail($fromMail, $fromName, $tos, $subject, $text, $attachments) {
+  $mail = new PHPMailer;
+  $mail->setFrom($fromMail, $fromName);
+  foreach($tos as $to) {
+        $mail->addAddress($to);
+  }
+  $mail->Subject = $subject;
+  $mail->Body = $text;
+
+  foreach($attachments as $a) {
+      if (is_file($a)){
+	$mail->addAttachment($a);
+      }
+    }
+
+
+  if(!$mail->send()) {
+      return "Message could not be sent. \n Mailer Error: " . $mail->ErrorInfo;
+  } else {
+    return 'Message has been sent';
+  }
+}
+
+function writeEmail($organ, $file,$state = SUBUNPUBLISHED, $attach = array()) {
+    global $emailUN;
+    global $emailPub;
+
+    if ($subject == '') {
+      if ($state == SUBUNPUBLISHED) {
+	$to = $emailUN[$organ];
+	$subject = 'Vorläufiges Protokoll: ' . $organ . ' ' .  $file;
+      } else {
+	$to = $emailPub[$organ];
+	$subject = 'Protokoll veröffentlicht: ' . $organ . ' ' .  $file;
+      }
+    }
+    // read email template
+    $path = REPORTDIR . $organ . '.email';
+
+
+    $text = "No email template provided for this organ";
+    if (is_file($path)) {
+        $file = fopen($path, "r") or die("File error");
+	$text = fread($file, filesize($path));
+	fclose($file);
+    }
+
+    return rlyWriteEmail('test@test.com', 'APVEL', $to, $subject, $text, $attach);
+
 }
 
 

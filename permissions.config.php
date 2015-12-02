@@ -10,6 +10,7 @@ $read = array("fsk" => $fskIntern, "stupa" => array());
 
 $write = array("fsk" => $fskIntern);
 
-$email = array("fsk" => array("info@konstantinzangerle.de"));
+$emailUN = array("fsk" => array("info@konstantinzangerle.de"));
+$emailPub = array("fsk" => array("info@konstantinzangerle.de"));
 
 ?>

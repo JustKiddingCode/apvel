@@ -27,11 +27,14 @@ if(isset($_GET['file']) && isset($_GET['organ'])){
 	  $text = preg_replace($regex, "", $text);
 
 	  if (isset($_GET['rly'])){
-            pandocToHTML($path, $path.".html");
-            pandocToPDF($path, $path.".pdf");
+            pandocToHTML($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'].".html");
+            pandocToPDF($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
 
 	    //move markdown file
 	    rename($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
+
+	    //write email
+	    writeEmail($organ, $_GET['file'], SUBPUBLISHED, array( REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . ".pdf"));
 
 	    header('Location: index.php');
 	    exit();
@@ -46,10 +49,10 @@ if(isset($_GET['file']) && isset($_GET['organ'])){
 	  $smarty->assign('text', $text);
 	  $smarty->assign('organ', $_GET['organ']);
 	  $smarty->assign('file', $_GET['file']);
-        }
     }
   }
 }
+
 
 $smarty->display('publish.tpl');
 

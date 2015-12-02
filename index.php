@@ -40,6 +40,10 @@ if (isset($_POST['withdraw']) && isset($_POST['organ'])){
 	rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_POST['organ'] . "/" . $mdfile);
 	unlink($htmlpath);
 	unlink($pdfpath);
+
+	//write Email:
+	$sub = "Protokoll zurueckgezogen : " . $_POST["organ"] . $_POST['report'];
+	rlyWriteEmail('test@test.com', 'APVEL', $emailUN[$_POST['organ']], $sub,"Begruendung folgt gleich" ,arr());
   }
 }
 

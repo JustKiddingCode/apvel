@@ -6,6 +6,8 @@ require('defines.php');
 require('lib.php');
 
 
+$user = "justkidding";
+
 $smarty = new Smarty();
 
 $smarty->setTemplateDir('smarty/templates');
@@ -27,7 +29,6 @@ if(isset($_GET['file']) && isset($_GET['organ'])){ // read file
     $smarty->assign('file', $_GET['file']);
   }
 }
-
 
 if(isset($_POST['text']) and isset($_POST['organ']) and isset($_POST['file'])) { //save changes
   if (checkFilename($_POST['file']) and checkOrgan($_POST['organ']) and checkWritePerms($user, $_POST['organ'])){

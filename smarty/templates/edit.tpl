@@ -48,7 +48,10 @@
       var opts = {
         basePath: 'EpicEditor/epiceditor',
         textarea: 'epicedit',
-        autogrow: true
+        autogrow: true,
+        file: {
+	  name:'{$organ}{$file}'
+        }
       }
       var editor = new EpicEditor(opts).load();
       editor.preview();
