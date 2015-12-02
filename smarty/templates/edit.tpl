@@ -26,9 +26,19 @@
       <div id="publishFrame" >
 	<a class="button" href="publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
       </div>
+
     </div>
-    	<span id="locktext"></span>
-  <br>  <br> <br>  <br>
+    <br><span id="locktext"></span> <br>  <br> <br>  <br>
+    
+    <p>Einige Hinweise: 
+    <ul>
+      <li> Füge vor neuen Überschriften (#) eine Leerzeile ein. </li>
+      <li> Ebenso vor Aufzählungen (mit *) </li>
+      <li> <strong>Fett</strong> mit **Fett** </li>
+      <li> <span style="font-style:italic">Kursiv</span> mit _Kursiv_ </li>
+    </ul>
+    
+    </p>
       <hr>
 
     <div id="epiceditor"> </div>
