@@ -75,7 +75,9 @@ if(isset($_POST['organ'])){
     readDirIntoArray($folderPub, ".md.html", $publishedReports);
     readDirIntoArray($folderUnPub, ".md", $unpublishedReports);
 
-
+    sort($unpublishedReports);
+    sort($publishedReports);
+    
     $smarty->assign('organ', $searchGroup);
     $smarty->assign('unPubRep', $unpublishedReports);
     $smarty->assign('pubRep', $publishedReports);
