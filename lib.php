@@ -134,5 +134,12 @@ function createLock($user, $organ, $file, $timeoffset = 900) {
   fwrite($file,$str);
 }
 
+function deleteLock($organ, $file) {
+  $filename =REPORTDIR . SUBUNPUBLISHED . $organ . "/" . $file . ".lock";
+  if (is_file($filename)){
+    unlink($filename);
+  }
+}
+
 
 ?>

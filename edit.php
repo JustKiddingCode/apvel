@@ -36,6 +36,9 @@ if(isset($_POST['text']) and isset($_POST['organ']) and isset($_POST['file'])) {
     $smarty->assign('text', $_POST['text']);
     $smarty->assign('organ', $_POST['organ']);
     $smarty->assign('file', $_POST['file']);
+    
+    //delete lock
+    deleteLock($_POST['organ'], $_POST['file']);
   } else {
     die('Fehler');
   }
