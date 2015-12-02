@@ -31,11 +31,13 @@ if(isset($_GET['file']) && isset($_GET['organ'])){ // read file
 }
 
 if(isset($_POST['text']) and isset($_POST['organ']) and isset($_POST['file'])) { //save changes
-  if (checkFilename($_POST['file']) and checkOrgan($_POST['organ']) and checkWritePerms($user, $_POST['organ'])){
+  if (checkFilename($_POST['file']) and checkOrgan($_POST['organ']) and checkWritePerms($user, $_POST['organ']) and checkLock($user, $_POST['organ'], $_POST['file'])){
     writeIntoFile($_POST['text'], $_POST['organ'], $_POST['file']);
     $smarty->assign('text', $_POST['text']);
     $smarty->assign('organ', $_POST['organ']);
     $smarty->assign('file', $_POST['file']);
+  } else {
+    die('Fehler');
   }
 }
 

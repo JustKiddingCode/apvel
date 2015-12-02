@@ -12,6 +12,9 @@ var timer;
 	  if (myAjax.readyState == 4) {
 	    if (myAjax.status == 200) {
 	      Response = myAjax.responseXML.documentElement.firstChild.data;
+	      if(Response == "Another user is editing this file") {
+		window.alert(Response);
+	      }
 	      document.getElementById("locktext").innerHTML = Response + " will refresh automatically";
 	      document.getElementById("submitbutton").style.visibility = "visible";
 	    }

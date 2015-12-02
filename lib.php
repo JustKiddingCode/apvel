@@ -44,6 +44,7 @@ function readFromFile($organ, $file) {
 	$text = fread($file, filesize($path));
 	fclose($file);
     }
+    return $text;
 }
 
 function pandocToHTML($src, $to){
@@ -105,6 +106,32 @@ function writeEmail($organ, $file,$state = SUBUNPUBLISHED, $attach = array()) {
 
     return rlyWriteEmail('test@test.com', 'APVEL', $to, $subject, $text, $attach);
 
+}
+
+function checkLock($user, $organ, $file) {
+  $filename =REPORTDIR . SUBUNPUBLISHED . $organ . "/" . $file . ".lock";
+  if (is_file($filename)) {
+    $file = fopen($filename, "r") or die("File error");
+    $text = fread($file, filesize($filename));
+    fclose($file);
+    $parts = explode(",", $text);
+    if ($parts[0] == $user){
+      return true;
+    } else {
+      if ($parts[1] > time()) {
+	return false;
+      }
+    }
+  }
+  return true;
+}
+
+function createLock($user, $organ, $file, $timeoffset = 900) {
+  $time = time() + $timeoffset;
+  $filename =REPORTDIR . SUBUNPUBLISHED . $organ . "/" . $file . ".lock";
+  $file = fopen($filename, "w") or die("File error");
+  $str = $user. "," . $time;
+  fwrite($file,$str);
 }
 
 
