@@ -16,7 +16,7 @@
   {/if}</div>
 
     <h1>  <img src="/logos/asta.png"> Protokoll Veröffentlichungs und Editier Lösung </h1>
-
+      <a class="button" href="search.php" style="float:left;">Suchen</a>
     <div id="mainOrganSelector">
 Organ auswählen:
     <form action="index.php" method="POST">
