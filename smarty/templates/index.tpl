@@ -15,7 +15,7 @@
    <a href="">Einloggen</a>
   {/if}</div>
 
-    <h1> AStA Protokoll Veröffentlichungs und Editier Lösung </h1>
+    <h1>  <img src="/logos/asta.png"> Protokoll Veröffentlichungs und Editier Lösung </h1>
 
     <div id="mainOrganSelector">
 Organ auswählen:
@@ -44,6 +44,9 @@ Organ auswählen:
     {/if}
 
     {if $showUnpublishedReports}
+      <h2>Template, Email editieren</h2>
+        <a href="edit.php?file=template&amp;organ={$organ}">Template editieren</a> <br/>
+        <a href="edit.php?file=email&amp;organ={$organ}">Email editieren</a>
       <h3>Unveröffentlichte Protokolle </h3>
        <ol>{foreach from=$unPubRep item=rep}
 	<li><a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a>

@@ -9,8 +9,8 @@
     <script type="text/javascript" src="script.js"> </script>
   </head>
   <body>
-  <a href="index.php"> Back </a>
-    <h1> AStA Protokoll Veröffentlichungs und Editier Lösung </h1>
+  <a href="index.php"> Back </a> <br/>
+    <h1> <img src="/logos/asta.png">Protokoll Veröffentlichungs und Editier Lösung </h1>
     <h2> Editing: {$organ} {$file} </h2>
     <br/>
 
@@ -36,6 +36,7 @@
       <li> Ebenso vor Aufzählungen (mit *) </li>
       <li> <strong>Fett</strong> mit **Fett** </li>
       <li> <span style="font-style:italic">Kursiv</span> mit _Kursiv_ </li>
+      <li> http://pandoc.org/README.html#pandocs-markdown </li>
     </ul>
     
     </p>
@@ -59,6 +60,7 @@
         basePath: 'EpicEditor/epiceditor',
         textarea: 'epicedit',
         autogrow: true,
+        clientSideStorage: false,
         file: {
 	  name:'{$organ}{$file}'
         }

@@ -25,6 +25,40 @@ function checkReadPerms($user, $organ) {
     global $read;
     return in_array($user, $read[$organ]);
 }
+function readTemplate($organ) {
+  $path = REPORTDIR . $organ . '.template.md';
+  if (file_exists($path)){
+    return file_get_contents($path);
+  } else {
+    error_log($path . " not found");
+  }
+}
+
+function readEmailTemplate($organ) {
+  $path = REPORTDIR . $organ . '.email';
+  if (file_exists($path)){
+    return file_get_contents($path);
+  } else {
+    error_log($path . " not found");
+  }
+}
+
+function writeTemplate($text, $organ) {
+    $path = REPORTDIR . $organ . '.template.md';
+    if (is_file($path)) {
+        $file = fopen($path, "w") or die("File error");
+	fwrite($file, $text);
+	fclose($file);
+    }
+}
+function writeEmailTemplate($text, $organ) {
+    $path = REPORTDIR . $organ . '.email';
+    if (is_file($path)) {
+        $file = fopen($path, "w") or die("File error");
+	fwrite($file, $text);
+	fclose($file);
+    }
+}
 
 
 function writeIntoFile($text, $organ, $file) {
@@ -40,9 +74,7 @@ function writeIntoFile($text, $organ, $file) {
 function readFromFile($organ, $file) {
     $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
     if (is_file($path)) {
-        $file = fopen($path, "r") or die("File error");
-	$text = fread($file, filesize($path));
-	fclose($file);
+	$text = file_get_contents($path);
     }
     return $text;
 }
