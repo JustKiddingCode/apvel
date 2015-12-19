@@ -1,6 +1,7 @@
 body {width: 80%;
   margin: auto;
-
+  padding:1em;
+  background: white;
 }
 
 #login {text-align: right; }
@@ -28,3 +29,8 @@ a.button {
   text-decoration: none;
   padding:0.2em;
 }
+
+html {
+ background: #F57C14 ;
+}
+
