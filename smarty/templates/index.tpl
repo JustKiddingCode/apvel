@@ -10,9 +10,9 @@
   <body>
   <div id="login">{if isset($user)}
    Hallo {$user} <br/>
-   <a href="">Ausloggen!</a>
+   <a href="auth.php?logout">Ausloggen!</a>
    {else}
-   <a href="">Einloggen</a>
+   <a href="auth.php">Einloggen</a>
   {/if}</div>
 
     <h1>  <img src="/logos/asta.png"> Protokoll Veröffentlichungs und Editier Lösung </h1>

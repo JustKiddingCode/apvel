@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // put full path to Smarty.class.php
 require('smarty3/Smarty.class.php');
@@ -19,9 +20,10 @@ $smarty->setConfigDir('smarty/configs');
 $organs = $organs;
 $smarty->assign('organs', $organs);
 
+if (isset($_SESSION['user']) ) {
+ $user = $_SESSION['user'];
+}
 
-//TODO: Real Authentification
-$user = "justkidding";
 $smarty->assign("user", $user);
 
 
@@ -43,7 +45,7 @@ if (isset($_POST['withdraw']) && isset($_POST['organ'])){
 
 	//write Email:
 	$sub = "Protokoll zurueckgezogen : " . $_POST["organ"] . $_POST['report'];
-	rlyWriteEmail('test@test.com', 'APVEL', $emailUN[$_POST['organ']], $sub,"Begruendung folgt gleich" ,arr());
+	rlyWriteEmail('test@test.com', 'APVEL', $emailUN[$_POST['organ']], $sub,"Begruendung folgt gleich" ,array());
   }
 }
 

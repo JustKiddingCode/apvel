@@ -2,6 +2,12 @@
 require_once('permissions.config.php');
 require_once('PHPMailer/PHPMailerAutoload.php');
 
+function startsWith($haystack,$needle,$case=true){
+    if ($case)
+        return strpos($haystack, $needle, 0) === 0;
+    return stripos($haystack, $needle, 0) === 0;
+}
+
 function endsWith($haystack,$needle,$case=true) {
         if($case){return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);}
         return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);
@@ -17,14 +23,6 @@ function checkOrgan($organ) {
     return array_key_exists($organ, $organs);
 }
 
-function checkWritePerms($user, $organ) {
-    global $write;
-    return in_array($user, $write[$organ]);
-}
-function checkReadPerms($user, $organ) {
-    global $read;
-    return in_array($user, $read[$organ]);
-}
 function readTemplate($organ) {
   $path = REPORTDIR . $organ . '.template.md';
   if (file_exists($path)){
