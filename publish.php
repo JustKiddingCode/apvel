@@ -35,7 +35,14 @@ if(isset($_GET['file']) && isset($_GET['organ'])){
 
 	    //write email
 	    writeEmail($organ, $_GET['file'], SUBPUBLISHED, array( REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . ".pdf"));
-
+            
+            //resolution collection
+            $conclusions = array();
+            preg_match_all(";\[beschluss\](.*?)\[/beschluss\];s",$text, $conclusions);
+            foreach($conclusions[0] as $key => $con) {
+	      $str = substr($con, 11, -12);
+	      file_put_contents(REPORTDIR . SUBPUBLISHED . $_GET['organ'] . ".resolutions", $_GET['file'] . ": ".$str . "\n", FILE_APPEND);
+	    }
 	    header('Location: index.php');
 	    exit();
 	  } else {

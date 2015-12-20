@@ -31,7 +31,7 @@ $smarty->assign("user", $user);
 
 //post/get?
 if (isset($_POST['withdraw']) && isset($_POST['organ'])){
-  if (checkOrgan($_POST['organ']) and checkWritePerms($user,$_POST['organ'])) {
+  if (checkOrgan($_POST['organ']) and checkWritePerms($_POST['organ'])) {
     $organ = $_POST['organ'];
     $mdfile = substr($_POST['report'], 0, -5);
     if (checkFileName($mdfile))
@@ -63,8 +63,8 @@ if(isset($_POST['organ'])){
 
     //show unpublished reports?
     $searchGroup = $_POST['organ'];
-    $smarty->assign("showUnpublishedReports", checkReadPerms($user, $_POST['organ']));
-    $smarty->assign("writeOnOrgan", checkWritePerms($user, $_POST['organ']));
+    $smarty->assign("showUnpublishedReports", checkReadPerms($_POST['organ']));
+    $smarty->assign("writeOnOrgan", checkWritePerms($_POST['organ']));
 
 
     //show unpublished reports

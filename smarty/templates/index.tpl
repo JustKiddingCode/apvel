@@ -46,7 +46,8 @@ Organ auswählen:
     {if $showUnpublishedReports}
       <h2>Template, Email editieren</h2>
         <a href="edit.php?file=template&amp;organ={$organ}">Template editieren</a> <br/>
-        <a href="edit.php?file=email&amp;organ={$organ}">Email editieren</a>
+        <a href="edit.php?file=email&amp;organ={$organ}">Email editieren</a> <br/>
+        <a href="edit.php?file=resolutions&amp;organ={$organ}">Beschlusssammlung editieren</a>
       <h3>Unveröffentlichte Protokolle </h3>
        <ol>{foreach from=$unPubRep item=rep}
 	<li><a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a>

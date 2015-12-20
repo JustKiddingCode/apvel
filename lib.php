@@ -41,6 +41,24 @@ function readEmailTemplate($organ) {
   }
 }
 
+function readResolutions($organ) {
+  $path = REPORTDIR . SUBPUBLISHED . $organ . '.resolutions';
+  if (file_exists($path)){
+    return file_get_contents($path);
+  } else {
+    error_log($path . " not found");
+  }
+}
+
+function writeResolutions($text, $organ) {
+    $path = REPORTDIR . SUBPUBLISHED . $organ . '.resolutions';
+    if (is_file($path)) {
+        $file = fopen($path, "w") or die("File error");
+	fwrite($file, $text);
+	fclose($file);
+    }
+}
+
 function writeTemplate($text, $organ) {
     $path = REPORTDIR . $organ . '.template.md';
     if (is_file($path)) {
