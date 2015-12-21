@@ -33,6 +33,8 @@ if(isset($_SESSION['user'])) {
             $_SESSION['user'] = $_POST['user'];
             $_SESSION['groups'] = $lineExplode[4];
             $smarty->assign('loggedIn', true);
+	    header("Location: index.php");
+	    exit();
           } else {
             error_log("Login attempt with wrong credentials for user: " . $_POST['user']);
           }

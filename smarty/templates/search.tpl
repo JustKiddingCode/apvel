@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css" >
   </head>
   <body>
+    <a href="index.php"> Back </a> <br/>
   <div id="login">{if isset($user)}
    Hallo {$user} <br/>
    <a href="auth.php?logout">Ausloggen!</a>

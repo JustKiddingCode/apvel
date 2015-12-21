@@ -27,8 +27,6 @@ if (isset($_SESSION['user']) ) {
 $smarty->assign("user", $user);
 
 
-
-
 //post/get?
 if (isset($_POST['withdraw']) && isset($_POST['organ'])){
   if (checkOrgan($_POST['organ']) and checkWritePerms($_POST['organ'])) {
@@ -63,9 +61,9 @@ if(isset($_POST['organ'])){
 
     //show unpublished reports?
     $searchGroup = $_POST['organ'];
-    $smarty->assign("showUnpublishedReports", checkReadPerms($_POST['organ']));
-    $smarty->assign("writeOnOrgan", checkWritePerms($_POST['organ']));
-
+    $smarty->assign("read", checkReadPerms($_POST['organ']));
+    $smarty->assign("write", checkWritePerms($_POST['organ']));
+    $smarty->assign("admin", checkAdminPerms($_POST['organ']));
 
     //show unpublished reports
     $folderPub = REPORTDIR . SUBPUBLISHED. $_POST['organ'] . '/';
