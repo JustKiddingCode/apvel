@@ -29,7 +29,8 @@ if(isset($_GET['file']) && isset($_GET['organ'])){
 	  if (isset($_GET['rly'])){
             pandocToHTML($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'].".html");
             pandocToPDF($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
-
+	    
+	    file_put_contents($path,$text); //removes intern tags
 	    //move markdown file
 	    rename($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
 
