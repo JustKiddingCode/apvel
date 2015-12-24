@@ -5,7 +5,8 @@ APVEL
 APVEL (AStA Protokoll Veröffentlichungs- und Editier Lösung) is a tool to write reports of meetings from organisations.
 It is designed to edit simple Markdown Files and show HTML files or, if wanted PDF files.
 
-APVEL uses EpicEditor, pandoc, smarty and PHPMailer. Thanks for writing great programs!
+APVEL uses EpicEditor, pandoc, smarty, and PHPMailer. Thanks for writing great programs!
+For authentification, connectors to DokuWiki is implemented.
 
 File structure
 
@@ -14,7 +15,7 @@ For each organisation there is this file structure:
 REPORT/PUBLISHED/ORGANISATION/
 REPORT/UNPUBLISHED/ORGANISATION/
 
-If a published report is requested it is first converted to html and then saved in FILE.md.html (uses same file name)
-UNPUBLISHED folders should have an .htaccess file to exclude users
+You can send e-mails from the editor, and configure apvel to write an email by publishing a report.
 
-It is possible to create git submodules for each group
+Published reports are available in different formats. By now, pdf, markdown and html are supported.
+UNPUBLISHED folders should have an .htaccess file to exclude users or the server should prevent this (nginx)
