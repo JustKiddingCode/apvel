@@ -61,16 +61,20 @@ Organ auswählen:
       {/if}
       {if isset($organ)}
 	<h3>Veröffentlichte Protokolle </h3>
-	<ol>{foreach from=$pubRep item=rep}
-	  <li><a href="reports/published/{$organ}/{$rep}">{$rep} </a>
-		  {if $writeOnOrgan}
-		    <form action="index.php" method="post">
+	<ol>{foreach from=$pubRep item=arrrep}
+	  <li> <ul>
+		{foreach from=$arrrep item=rep}
+         		<li><a href="reports/published/{$organ}/{$rep}">{$rep} </a> </li>
+		{/foreach}
+		  {if $admin}
+		    <li><form action="index.php" method="post">
 		      <input type="text" name="withdraw" style="visibility:hidden;width:0em;">
 		      <input type="text" name="organ" value="{$organ}" style="visibility:hidden;width:0em;">
-		      <input type="text" name="report" value="{$rep}" style="visibility:hidden;width:0em;">
+		      <input type="text" name="report" value="{$arrrep[0]}" style="visibility:hidden;width:0em;">
 		      <button type="text">Withdraw</button>
-		    </form>
+		    </form> </li>
 		  {/if}
+		</ul>
 	  </li>
 	{/foreach}</ol>
       {/if}

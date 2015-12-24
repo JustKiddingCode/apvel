@@ -29,7 +29,7 @@ $smarty->assign("user", $user);
 
 //post/get?
 if (isset($_POST['withdraw']) && isset($_POST['organ'])){
-  if (checkOrgan($_POST['organ']) and checkWritePerms($_POST['organ'])) {
+  if (checkOrgan($_POST['organ']) and checkAdminPerms($_POST['organ'])) {
     $organ = $_POST['organ'];
     $mdfile = substr($_POST['report'], 0, -5);
     if (checkFileName($mdfile))
@@ -49,13 +49,32 @@ if (isset($_POST['withdraw']) && isset($_POST['organ'])){
 
 function readDirIntoArray($folder, $endsFilter, & $arr) {
     $handle = opendir($folder);
-    $arr = [];
     while (false !== ($entry = readdir($handle))) {
 	if (endsWith($entry, $endsFilter)) {
-	    array_push($arr, $entry);
+	    $arr[] =  $entry;
         }
     }
 }
+
+function getPublishedArray($folder, & $arr) {
+	$tmp = array();
+	readDirIntoArray($folder, ".md", $tmp);
+	sort($tmp);
+	$arr = array();
+	foreach($tmp as $file) {
+		$add = array();
+		$add[] = $file;
+		if (file_exists($folder . $file . ".html")) {
+			$add[] = $file . ".html";
+		}
+		if (file_exists($folder . $file . ".pdf")) {
+			$add[] = $file . ".pdf";
+		}
+		$arr[] = $add;
+	}
+}
+
+
 if(isset($_POST['organ'])){
   if (checkOrgan($_POST['organ'])){ //input validation
 
@@ -71,12 +90,12 @@ if(isset($_POST['organ'])){
     if (! is_dir($folderPub)) die("Wrong folder structure: " . $folderPub);
     if (! is_dir($folderUnPub)) die("Wrong folder structure: " . $folderUnPub);
 
-    $unpublishedReports = [];
-    readDirIntoArray($folderPub, ".md.html", $publishedReports);
+    $unpublishedReports = array();
+    $publishedReports = array();
+    getPublishedArray($folderPub, $publishedReports);
     readDirIntoArray($folderUnPub, ".md", $unpublishedReports);
 
     sort($unpublishedReports);
-    sort($publishedReports);
     
     $smarty->assign('organ', $searchGroup);
     $smarty->assign('unPubRep', $unpublishedReports);

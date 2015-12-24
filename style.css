@@ -50,3 +50,19 @@ margin-left:auto;
 margin-right:auto; 
 margin-top:10em;
 }
+
+ol li {
+  padding:0.2em;
+}
+ol li ul {
+  display: table;
+  width:100%;
+  list-style-type: none;
+
+}
+
+ol li ul li {
+  float:left;
+  width:20%;
+  display: table-cell;
+}
