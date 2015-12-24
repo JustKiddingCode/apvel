@@ -38,7 +38,7 @@ Organ auswählen:
 	<h3> Neues Protokoll hinzufügen </h3>
 
 	<form action="create.php" method="POST">
-	  <input type="text" name="organ" value="{$slang}" style="visibility:hidden;width:0em;">
+	  <input type="text" name="organ" value="{$organ}" style="visibility:hidden;width:0em;">
 	  </select>
 	  <input type="text" name="date"> YYYY/MM/DD
 	  <button type="submit" >Neu anlegen</button>
@@ -60,6 +60,11 @@ Organ auswählen:
 	</ol>
       {/if}
       {if isset($organ)}
+	<h3> Beschlusssammlung </h3>
+Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Beschlüsse anschauen.
+<br/>
+<a href="reports/published/{$organ}.resolutions">Beschlusssammlung</a>
+
 	<h3>Veröffentlichte Protokolle </h3>
 	<ol>{foreach from=$pubRep item=arrrep}
 	  <li> <ul>
