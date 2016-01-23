@@ -14,8 +14,8 @@
     <br/>
   {if $loggedIn == false}
   <form name="login" action="auth.php" method="POST">
-    User: <input type="text" name="user"> <br/>
-    Password: <input type="password" name="password"> <br/>
+    <div class="loginelement">User: </div><input type="text" name="user"> <br/>
+    <div class="loginelement">Password:</div> <input type="password" name="password"> <br/>
     <button type="submit">Log in!</button>
   </form>
   {else}

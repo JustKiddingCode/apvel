@@ -66,3 +66,8 @@ ol li ul li {
   width:20%;
   display: table-cell;
 }
+
+.loginelement {
+  width:8em;
+  float:left;
+}
