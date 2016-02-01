@@ -41,6 +41,8 @@ if(isset($_POST['organ'])){
 			$add = $_POST['mailtext'] . "\n====End of Invitation====\n";
 			$add .= file_get_contents($file);
 			file_put_contents($file, $add);
+
+			rlyWriteEMail($emailFrom[$_POST['organ']],"APVEL Protokollsystem",$emailUN[$_POST['organ']],"Einladung zur nächsten Sitzung  " . $organs[$_POST['organ']], $_POST['mailtext'],array());
 		}
 		// get text
 		$lastInvite = "";
