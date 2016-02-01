@@ -39,12 +39,12 @@ Organ auswählen:
 	<h3>Einladung verschicken</h3>
 	<form action="invite.php" method="POST">
 	  <input type="text" name="organ" value="{$organ}" style="visibility:hidden;width:0em;">
-          <textarea name="mailtext"></textarea>
+          <textarea name="mailtext" class="emailedit"></textarea>
 	  <button type="submit" >Einladung verschicken</button>
 	</form>
       {/if}
       {if isset($organ)}
-	<a href="reports/{$organ}.invitations">Text aller Einladungen</a>
+	<a href="reports/{$organ}.invitations.txt">Text aller Einladungen</a>
 	<h4>Die letzte Einladung </h4>
 	<pre>{$lastInvite}</pre>
       {/if}

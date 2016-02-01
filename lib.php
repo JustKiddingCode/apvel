@@ -42,7 +42,7 @@ function readEmailTemplate($organ) {
 }
 
 function readResolutions($organ) {
-  $path = REPORTDIR . SUBPUBLISHED . $organ . '.resolutions';
+  $path = REPORTDIR . SUBPUBLISHED . $organ . '.resolutions.txt';
   if (file_exists($path)){
     return file_get_contents($path);
   } else {
@@ -51,7 +51,7 @@ function readResolutions($organ) {
 }
 
 function writeResolutions($text, $organ) {
-    $path = REPORTDIR . SUBPUBLISHED . $organ . '.resolutions';
+    $path = REPORTDIR . SUBPUBLISHED . $organ . '.resolutions.txt';
     if (is_file($path)) {
         $file = fopen($path, "w") or die("File error");
 	fwrite($file, $text);

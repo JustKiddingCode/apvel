@@ -36,7 +36,7 @@ if(isset($_GET['file']) && isset($_GET['organ'])){ // read file
       $smarty->assign('text', readEmailTemplate($_GET['organ']));
       $smarty->assign('organ', $_GET['organ']);
       $smarty->assign('file', $_GET['file']);    
-    } else if ($_GET['file'] == 'resolutions' && checkReadPerms($_GET['organ'])) {
+    } else if ($_GET['file'] == 'resolutions.txt' && checkReadPerms($_GET['organ'])) {
       $smarty->assign('text', readResolutions($_GET['organ']));
       $smarty->assign('organ', $_GET['organ']);
       $smarty->assign('file', $_GET['file']);    
@@ -65,7 +65,7 @@ if(isset($_POST['text']) and isset($_POST['organ']) and isset($_POST['file'])) {
 	$smarty->assign('organ', $_POST['organ']);
 	$smarty->assign('file', $_POST['file']);
 	deleteLock($_POST['organ'], $_POST['file']);    
-      } else if ($_POST['file'] == "resolutions") {
+      } else if ($_POST['file'] == "resolutions.txt") {
 	writeResolutions($_POST['text'], $_POST['organ']);
 	$smarty->assign('text', $_POST['text']);
 	$smarty->assign('organ', $_POST['organ']);

@@ -42,7 +42,7 @@ if(isset($_GET['file']) && isset($_GET['organ'])){
             preg_match_all(";\[beschluss\](.*?)\[/beschluss\];s",$text, $conclusions);
             foreach($conclusions[0] as $key => $con) {
 	      $str = substr($con, 11, -12);
-	      file_put_contents(REPORTDIR . SUBPUBLISHED . $_GET['organ'] . ".resolutions", $_GET['file'] . ": ".$str . "\n", FILE_APPEND);
+	      file_put_contents(REPORTDIR . SUBPUBLISHED . $_GET['organ'] . ".resolutions.txt", $_GET['file'] . ": ".$str . "\n", FILE_APPEND);
 	    }
 	    header('Location: index.php');
 	    exit();

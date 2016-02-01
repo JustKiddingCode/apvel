@@ -34,7 +34,7 @@ if(isset($_POST['organ'])){
 		$smarty->assign("admin", checkAdminPerms($_POST['organ']));
 		$smarty->assign("organ", $_POST['organ']);	
 		
-		$file = REPORTDIR . "/" . $_POST['organ'] . ".invitations";
+		$file = REPORTDIR . "/" . $_POST['organ'] . ".invitations.txt";
 		//only admin is allowed to invite
 		if (checkAdminPerms($_POST['organ']) && isset($_POST['mailtext'])) {
 			// append to report dir / $organ.invitation

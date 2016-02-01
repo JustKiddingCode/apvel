@@ -50,7 +50,7 @@ Organ auswählen:
 	<h2>Template, Email editieren</h2>
 	  <a href="edit.php?file=template&amp;organ={$organ}">Template editieren</a> <br/>
 	  <a href="edit.php?file=email&amp;organ={$organ}">Email editieren</a> <br/>
-	  <a href="edit.php?file=resolutions&amp;organ={$organ}">Beschlusssammlung editieren</a>
+	  <a href="edit.php?file=resolutions.txt&amp;organ={$organ}">Beschlusssammlung editieren</a>
       {/if}
       {if $read}
 	<h3>Unveröffentlichte Protokolle </h3>
@@ -64,7 +64,7 @@ Organ auswählen:
 	<h3> Beschlusssammlung </h3>
 Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Beschlüsse anschauen.
 <br/>
-<a href="reports/published/{$organ}.resolutions">Beschlusssammlung</a>
+<a href="reports/published/{$organ}.resolutions.txt">Beschlusssammlung</a>
 
 	<h3>Veröffentlichte Protokolle </h3>
 	<ol>{foreach from=$pubRep item=arrrep}
