@@ -19,3 +19,12 @@ You can send e-mails from the editor, and configure apvel to write an email by p
 
 Published reports are available in different formats. By now, pdf, markdown and html are supported.
 UNPUBLISHED folders should have an .htaccess file to exclude users or the server should prevent this (nginx)
+
+APVEL in Use
+------------
+
+![](doc/screenshot/invitation.png)
+![](doc/screenshot/organ_selector.png)
+![](doc/screenshot/overview.png)
+![](doc/screenshot/using_epiceditor.png)
+
