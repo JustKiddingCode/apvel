@@ -23,8 +23,8 @@ UNPUBLISHED folders should have an .htaccess file to exclude users or the server
 APVEL in Use
 ------------
 
-![](doc/screenshot/invitation.png)
-![](doc/screenshot/organ_selector.png)
-![](doc/screenshot/overview.png)
-![](doc/screenshot/using_epiceditor.png)
+![](https://raw.githubusercontent.com/JustKiddingCode/apvel/master/doc/doc/screenshot/invitation.png)
+![](https://raw.githubusercontent.com/JustKiddingCode/apvel/master/doc/doc/screenshot/organ_selector.png)
+![](https://raw.githubusercontent.com/JustKiddingCode/apvel/master/doc/doc/screenshot/overview.png)
+![](https://raw.githubusercontent.com/JustKiddingCode/apvel/master/doc/doc/screenshot/using_epiceditor.png)
 
