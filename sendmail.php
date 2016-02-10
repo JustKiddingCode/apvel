@@ -12,7 +12,6 @@ if (isset($_GET['organ']) && isset($_GET['file'])) {
     pandocToPDF($file, $file);
     $text = file_get_contents(REPORTDIR . $_GET['organ']. ".email");
     $text .= file_get_contents($file);
-    echo $text;
     echo rlyWriteEmail("justkidding@asta-kit.de","APVEL", $emailUN[$_GET['organ']],"Unveröffentlichtes Protokoll" . $_GET['file'] ." " .  $_GET['organ'], $text, array($file . ".pdf", $file)); 
   }
 }
