@@ -107,6 +107,7 @@ function pandocToPDF($src, $to){
 
 function rlyWriteEmail($fromMail, $fromName, $tos, $subject, $text, $attachments) {
   $mail = new PHPMailer;
+  $mail->CharSet = "utf-8";
   $mail->setFrom($fromMail, $fromName);
   foreach($tos as $to) {
         $mail->addAddress($to);
