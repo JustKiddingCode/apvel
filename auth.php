@@ -31,7 +31,7 @@ if(isset($_SESSION['user'])) {
           $cHash = new PassHash();
           if ($cHash->verify_hash($_POST['password'],$lineExplode[1] )) {
             $_SESSION['user'] = $_POST['user'];
-            $_SESSION['groups'] = explode(",",$lineExplode[4]);
+            $_SESSION['groups'] = array_map('trim',explode(",",$lineExplode[4]));
             $smarty->assign('loggedIn', true);
 	    header("Location: index.php");
 	    exit();
