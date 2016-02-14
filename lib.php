@@ -96,12 +96,12 @@ function readFromFile($organ, $file) {
 }
 
 function pandocToHTML($src, $to){
-    $cmd = "pandoc ". $src . " -f markdown -t html -s -o " . $to;
+    $cmd = "PATH=/usr/bin pandoc ". $src . " -f markdown -t html -s -o " . $to;
     exec($cmd);
 }
 
 function pandocToPDF($src, $to){
-    $cmd = "pandoc ". $src . " -f markdown -o " . $to . ".pdf";
+    $cmd = "PATH=/usr/bin pandoc ". $src . " -f markdown -o " . $to . ".pdf";
     exec($cmd);
 }
 
