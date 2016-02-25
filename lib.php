@@ -153,7 +153,7 @@ function writeEmail($organ, $file,$state = SUBUNPUBLISHED, $attach = array()) {
 	fclose($file);
     }
 
-    return rlyWriteEmail('test@test.com', 'APVEL', $to, $subject, $text, $attach);
+    return rlyWriteEmail($emailFrom[$organ], 'APVEL', $to, $subject, $text, $attach);
 
 }
 

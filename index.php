@@ -43,7 +43,7 @@ if (isset($_POST['withdraw']) && isset($_POST['organ'])){
 
 	//write Email:
 	$sub = "Protokoll zurueckgezogen : " . $_POST["organ"] . $_POST['report'];
-	rlyWriteEmail('test@test.com', 'APVEL', $emailUN[$_POST['organ']], $sub,"Begruendung folgt gleich" ,array());
+	rlyWriteEmail($emailFrom[$_POST['organ']], 'APVEL', $emailUN[$_POST['organ']], $sub,"Begruendung folgt gleich" ,array());
   }
 }
 
