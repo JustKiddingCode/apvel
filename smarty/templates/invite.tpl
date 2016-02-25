@@ -54,7 +54,7 @@ Organ auswählen:
   
   <p>Benutze deine Logindaten für das AStA-Wiki für den Log In oder wähle rechts ein Organ aus.
   
-  <br/><br/> <a href="wiki.asta-kit.de">Zum AStA-Wiki</a>
+  <br/><br/> <a href="https://wiki.asta.kit.edu">Zum AStA-Wiki</a>
   </p>
   {/if}
   

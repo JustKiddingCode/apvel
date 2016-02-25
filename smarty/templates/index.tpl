@@ -90,10 +90,10 @@ Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Besc
   
   <p>Benutze deine Logindaten für das AStA-Wiki für den Log In oder wähle rechts ein Organ aus.
   
-  <br/><br/> <a href="wiki.asta-kit.de">Zum AStA-Wiki</a>
+  <br/><br/> <a href="https://wiki.asta.kit.edu">Zum AStA-Wiki</a>
   </p>
   {/if}
   
-  <div id="footer"> <span style="font-size:0.8em">Bei Fragen, Anregungen, Kritik: <a href="mailto:admin@asta-kit.de"> Mail</a> </span></div>
+  <div id="footer"> <span style="font-size:0.8em">Bei Fragen, Anregungen, Kritik: <a href="mailto:admin@asta-kit.de"> Mail</a> </span> <br/> <a href="http://www.asta-kit.de">Zur Hauptseite</a></div>
   </body>
 </html>
