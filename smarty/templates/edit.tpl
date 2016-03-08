@@ -37,6 +37,8 @@
       <li> <strong>Fett</strong> mit **Fett** </li>
       <li> <span style="font-style:italic">Kursiv</span> mit _Kursiv_ </li>
       <li> http://pandoc.org/README.html#pandocs-markdown </li>
+      <li> Beschlüsse in [beschluss]Hier kommt der Beschlusstext [/beschluss] packen</li>
+      <li> Interne Daten in [intern]Sehr vertrauliche Informationen [/intern] packen</li>
     </ul>
     
     </p>
