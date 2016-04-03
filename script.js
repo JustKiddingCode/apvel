@@ -3,6 +3,7 @@ var timer;
       function refreshWritePermission(file,organ){
 	getWritePermission(file,organ);
 	document.getElementById("publish").style.visibility = "hidden";
+	document.getElementById("sendmailbutton").style.visibility = "hidden";
 	timer = setInterval(function() { getWritePermission(file,organ) },180000);
       }
 
