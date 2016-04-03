@@ -1,7 +1,7 @@
 <?php
-require('lib.php');
-require('defines.php');
-require('smarty3/Smarty.class.php');
+require 'lib.php';
+require 'defines.php';
+require 'smarty3/Smarty.class.php';
 
 
 $smarty = new Smarty();
@@ -15,7 +15,7 @@ $smarty->setConfigDir('smarty/configs');
 
 $dir = REPORTDIR . SUBPUBLISHED;
 if (isset($_POST['search'])) {
-  $smarty->assign('result', exec("grep -rn --include=*.md " . escapeshellarg($_POST['search']) . " ". $dir));
+    $smarty->assign('result', exec("grep -rn --include=*.md " . escapeshellarg($_POST['search']) . " ". $dir));
   
   
 }
