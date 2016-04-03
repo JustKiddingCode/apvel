@@ -11,11 +11,11 @@ if(isset($_POST["organ"]) && isset($_POST["date"])) {
         $filename = $date[0] . "-" . $date[1] . "-" . $date[2] . ".md";
         $filenamePub = REPORTDIR . SUBPUBLISHED . $_POST['organ'] . "/" . $date[0] . "-" . $date[1] . "-" . $date[2] . ".md";
 
-        if(is_file(REPORTDIR . SUBUNPUBLISHED . $_POST['organ'] . "/" . $filename)) { // locate to edit.php
+        if (is_file(REPORTDIR . SUBUNPUBLISHED . $_POST['organ'] . "/" . $filename)) { // locate to edit.php
             header('Location: edit.php?file='.$filename . "&organ=" . $_POST['organ']);
             exit();
         }
-        if(is_file(REPORTDIR . SUBPUBLISHED . $_POST['organ'] . "/". $filename)) {
+        if (is_file(REPORTDIR . SUBPUBLISHED . $_POST['organ'] . "/". $filename)) {
             die("Already published");
         }
 

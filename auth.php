@@ -1,4 +1,15 @@
 <?php
+/**
+* @author Konstantin Zangerle
+* @license BSD 2-Clause
+*
+* Authentification script of APVEL
+*
+* Authentificates the user and sets SESSION variables
+* (user,groups). 
+* Uses parts of DokuWikis src to do this.
+*/
+
 require_once 'DokuWiki/PassHash.class.php';
 require 'smarty3/Smarty.class.php';
 require 'lib.php';
@@ -18,10 +29,9 @@ session_start();
 if (isset($_GET['logout'])) {
     session_unset();
 }
-if(isset($_SESSION['user'])) { 
+if (isset($_SESSION['user'])) {
     $smarty->assign('loggedIn', true);
-
-} else if(isset($_POST['user']) and isset($_POST['password'])) {
+} else if (isset($_POST['user']) and isset($_POST['password'])) {
     $handle = fopen("DokuWiki/users.auth.php", "r");
     if ($handle) {
         while (($line = fgets($handle)) !== false) {
