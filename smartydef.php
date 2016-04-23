@@ -9,4 +9,10 @@ $smarty->setCompileDir('smarty/templates_c');
 $smarty->setCacheDir('smarty/cache');
 $smarty->setConfigDir('smarty/configs');
 
+
+
+if (isset($_SESSION['user']) ) {
+    $smarty->assign("user", $_SESSION['user']);
+}
+
 ?>

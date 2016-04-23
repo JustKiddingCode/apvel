@@ -41,14 +41,6 @@ function getPublishedArray($folder, & $arr)
 
 $smarty->assign('organs', $organs); // include from permissions.config.php
 
-if (isset($_SESSION['user']) ) {
-    $user = $_SESSION['user'];
-} else {
-    $user = "";
-}
-
-$smarty->assign("user", $user);
-
 
 //post/get?
 if (isset($_POST['organ']) && checkOrgan($_POST['organ'])){ 
