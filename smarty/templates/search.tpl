@@ -5,6 +5,6 @@
       Search: <input type="text" name="search">
       <button type="submit" >Ändern</button>
     </form>
-    <p>{if isset $result}  {$result} {/if}  </p>
+    <p>{if isset($result)}  {$result} {/if}  </p>
 
 {include file='footer.tpl'}
