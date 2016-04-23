@@ -1,21 +1,21 @@
 <?php
-
+session_start();
 
 // put full path to Smarty.class.php
-require 'smarty3/Smarty.class.php';
+require_once 'smartydef.php';
 require 'defines.php';
 require 'lib.php';
 
+function remove_intern_tags($text){
+	return preg_replace(INTERN_REGEX, "", $text);
+}
 
-$smarty = new Smarty();
-
-$smarty->setTemplateDir('smarty/templates');
-$smarty->setCompileDir('smarty/templates_c');
-$smarty->setCacheDir('smarty/cache');
-$smarty->setConfigDir('smarty/configs');
 
 if(isset($_GET['file']) && isset($_GET['organ'])) {
-    if (checkOrgan($_GET['organ']) && checkFilename($_GET['file'])) {
+    if (checkOrgan($_GET['organ']) && 
+        checkFilename($_GET['file']) &&
+	checkAdminPerms($_GET['organ'])
+	) {
         $organ = $_GET['organ'];
         $folder = REPORTDIR . SUBUNPUBLISHED . $organ . '/' ;
         $path = $folder.$_GET['file'];
@@ -23,8 +23,7 @@ if(isset($_GET['file']) && isset($_GET['organ'])) {
             $text = readFromFile($organ, $_GET['file']);
 
             //remove [intern][/intern]
-            $regex = ";\[intern\](.*?)\[/intern\];s";
-            $text = preg_replace($regex, "", $text);
+            $text = remove_intern_tags($text);
 
             if (isset($_GET['rly'])) {
                 pandocToHTML($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'].".html");
