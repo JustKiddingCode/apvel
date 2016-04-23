@@ -2,51 +2,11 @@
 session_start();
 
 // put full path to Smarty.class.php
-require 'smarty3/Smarty.class.php';
 require 'defines.php';
 require 'lib.php';
 require_once 'permissions.config.php';
+require_once 'smartydef.php'; // init $smarty var
 
-$smarty = new Smarty();
-
-
-$smarty->setTemplateDir('smarty/templates');
-$smarty->setCompileDir('smarty/templates_c');
-$smarty->setCacheDir('smarty/cache');
-$smarty->setConfigDir('smarty/configs');
-
-
-
-$organs = $organs;
-$smarty->assign('organs', $organs);
-
-if (isset($_SESSION['user']) ) {
-    $user = $_SESSION['user'];
-}
-
-$smarty->assign("user", $user);
-
-
-//post/get?
-if (isset($_POST['withdraw']) && isset($_POST['organ'])) {
-    if (checkOrgan($_POST['organ']) and checkAdminPerms($_POST['organ'])) {
-        $organ = $_POST['organ'];
-        $mdfile = substr($_POST['report'], 0, -5);
-        if (checkFileName($mdfile)) {
-            $mdpath = REPORTDIR.SUBPUBLISHED.$_POST['organ']."/" . $mdfile; 
-        }
-        $htmlpath = $mdpath.".html";
-        $pdfpath = $mdpath.".pdf";
-
-        rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_POST['organ'] . "/" . $mdfile);
-        unlink($htmlpath);
-        unlink($pdfpath);
-
-        //write Email:
-        $sub = "Protokoll zurueckgezogen : " . $_POST["organ"] . $_POST['report'];
-        rlyWriteEmail($emailFrom[$_POST['organ']], 'APVEL', $emailUN[$_POST['organ']], $sub, "Begruendung folgt gleich", array());
-    }
-}
 
 function readDirIntoArray($folder, $endsFilter, & $arr) 
 {
@@ -78,11 +38,40 @@ function getPublishedArray($folder, & $arr)
 }
 
 
-if(isset($_POST['organ'])) {
-    if (checkOrgan($_POST['organ'])) { //input validation
 
+$smarty->assign('organs', $organs); // include from permissions.config.php
+
+if (isset($_SESSION['user']) ) {
+    $user = $_SESSION['user'];
+} else {
+    $user = "";
+}
+
+$smarty->assign("user", $user);
+
+
+//post/get?
+if (isset($_POST['organ']) && checkOrgan($_POST['organ'])){ 
+    if (isset($_POST['withdraw'])) {
+	    if (checkOrgan($_POST['organ']) and checkAdminPerms($_POST['organ'])) {
+		$organ = $_POST['organ'];
+		$mdfile = substr($_POST['report'], 0, -5);
+		if (checkFileName($mdfile)) {
+		    $mdpath = REPORTDIR.SUBPUBLISHED.$_POST['organ']."/" . $mdfile; 
+		}
+		$htmlpath = $mdpath.".html";
+		$pdfpath = $mdpath.".pdf";
+
+		rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_POST['organ'] . "/" . $mdfile);
+		unlink($htmlpath);
+		unlink($pdfpath);
+
+		//write Email:
+		$sub = "Protokoll zurueckgezogen : " . $_POST["organ"] . $_POST['report'];
+		rlyWriteEmail($emailFrom[$_POST['organ']], 'APVEL', $emailUN[$_POST['organ']], $sub, "Begruendung folgt gleich", array());
+    	    }
+     } else {
         //show unpublished reports?
-        $searchGroup = $_POST['organ'];
         $smarty->assign("read", checkReadPerms($_POST['organ']));
         $smarty->assign("write", checkWritePerms($_POST['organ']));
         $smarty->assign("admin", checkAdminPerms($_POST['organ']));
@@ -102,7 +91,7 @@ if(isset($_POST['organ'])) {
 
         sort($unpublishedReports);
     
-        $smarty->assign('organ', $searchGroup);
+        $smarty->assign('organ', $_POST['organ']);
         $smarty->assign('unPubRep', $unpublishedReports);
         $smarty->assign('pubRep', $publishedReports);
 

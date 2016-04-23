@@ -1,17 +1,8 @@
 <?php
 session_start();
-// put full path to Smarty.class.php
-require 'smarty3/Smarty.class.php';
 require 'defines.php';
 require 'lib.php';
-
-
-$smarty = new Smarty();
-
-$smarty->setTemplateDir('smarty/templates');
-$smarty->setCompileDir('smarty/templates_c');
-$smarty->setCacheDir('smarty/cache');
-$smarty->setConfigDir('smarty/configs');
+require_once 'smartydef.php';
 
 $handle = opendir(REPORTDIR);
 
