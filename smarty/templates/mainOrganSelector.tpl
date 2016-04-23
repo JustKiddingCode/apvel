@@ -1,6 +1,6 @@
 <div id="mainOrganSelector">
 	Organ auswählen:
-	<form action="invite.php" method="POST">
+	<form action="" method="POST">
 		<select name="organ" size="1"  onchange="this.form.submit()">
 			<option value="---">---</option>
 			{foreach key=slang item=name from=$organs}
