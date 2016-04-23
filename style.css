@@ -19,6 +19,10 @@ body {width: 80%;
 	  margin-left:auto;
 	  margin-right:auto; }
 
+#menubar {
+	height: 1em;
+}
+
 .emailedit {
 	width: 80em;
 	height: 50em;

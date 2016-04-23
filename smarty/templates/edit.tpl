@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>APVEL</title>
-    <meta name="description" content="EpicEditor is an embeddable JavaScript Markdown editor with split fullscreen editing, live previewing, automatic draft saving, offline support, and more.">
-      <link rel="stylesheet" href="style.css" >
-    <script type="text/javascript" src="EpicEditor/epiceditor/js/epiceditor.min.js" > </script>
-    <script type="text/javascript" src="script.js"> </script>
-  </head>
-  <body>
-  <a href="index.php"> Back </a> <br/>
-    <h1> <img src="/logos/asta.png">Protokoll Veröffentlichungs und Editier Lösung </h1>
-    <h2> Editing: {$organ} {$file} </h2>
+{include file='header.tpl'}   
+<h2> Editing: {$organ} {$file} </h2>
     <br/>
 
     <div>
@@ -75,6 +63,4 @@
 
     </script>
 
-
-  </body>
-</html>
+{include file='footer.tpl'}
