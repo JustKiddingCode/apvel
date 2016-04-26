@@ -13,6 +13,7 @@
       {if $admin}
         <div id="publishFrame" >
   	  <a class="button" href="publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
+	  <a class="button" href="download.php?file={$file}&amp;organ={$organ}"> Download </a>
         </div>
       {/if}
     </div>
