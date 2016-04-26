@@ -118,7 +118,7 @@ function pandocToHTML($src, $to)
 
 function pandocToPDF($src, $to)
 {
-    $cmd = "PATH=/usr/bin pandoc ". $src . " -f markdown -o " . $to . ".pdf";
+    $cmd = "PATH=/usr/bin pandoc ". $src . " -f markdown -o " . $to;
     exec($cmd);
 }
 
