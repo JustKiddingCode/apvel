@@ -10,11 +10,11 @@
 	<a id="sendmailbutton" class="button" href="sendmail.php?file={$file}&amp;organ={$organ}">Send email</a>
       </div>
 
-
-      <div id="publishFrame" >
-	<a class="button" href="publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
-      </div>
-
+      {if $admin}
+        <div id="publishFrame" >
+  	  <a class="button" href="publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
+        </div>
+      {/if}
     </div>
     <br><span id="locktext"></span> <br>  <br> <br>  <br>
     
@@ -36,7 +36,7 @@
 
     <br/>
 
-     <form action="edit.php" method="POST">
+    <form action="edit.php?organ={$organ}&amp;file={$file}" method="POST">
       <button type="submit" id="submitbutton" style="visibility:hidden;">Ändern</button>
       <input type="text"  name="organ" value="{$organ}" style="visibility:hidden;">
       <input type="text"  name="file" value="{$file}" style="visibility:hidden;">
