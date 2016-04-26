@@ -5,6 +5,7 @@
 		<title>APVEL</title>
 		<meta name="description" content="Apvel is the online editor and report publish system used by the Fachschaftenkonferenz (FSK) and other organs of the student council at KIT" /> 
 		<script type="text/javascript" src="EpicEditor/src/editor.js" > </script>
+		<script type="text/javascript" src="script.js"> </script>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
