@@ -23,6 +23,7 @@ function getPublishedArray($folder, & $arr)
     $tmp = array();
     readDirIntoArray($folder, ".md", $tmp);
     sort($tmp);
+    $tmp = array_reverse($tmp);
     $arr = array();
     foreach($tmp as $file) {
         $add = array();
@@ -82,9 +83,15 @@ if (isset($_POST['organ']) && checkOrgan($_POST['organ'])){
         readDirIntoArray($folderUnPub, ".md", $unpublishedReports);
 
         sort($unpublishedReports);
-    
+
+   	if(isset($_GET['page'])) {
+		$_GET['page'] = (int) $_GET['page'];
+	} else {
+		$_GET['page'] = 0;
+	}
         $smarty->assign('organ', $_POST['organ']);
         $smarty->assign('unPubRep', $unpublishedReports);
+	$smarty->assign('page', $_GET['page']);
         $smarty->assign('pubRep', $publishedReports);
 
     }
