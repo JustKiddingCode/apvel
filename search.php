@@ -10,7 +10,7 @@ require 'defines.php';
 
 $dir = REPORTDIR . SUBPUBLISHED;
 if (isset($_POST['search'])) {
-    $smarty->assign('result', exec("grep -rn --include=*.md " . escapeshellarg($_POST['search']) . " ". $dir));
+    $smarty->assign('result', shell_exec("grep -rn --include=*.md " . escapeshellarg($_POST['search']) . " ". $dir));
   
   
 }
