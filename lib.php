@@ -1,6 +1,7 @@
 <?php
 require_once 'permissions.config.php';
 require_once 'PHPMailer/PHPMailerAutoload.php';
+require_once 'lib.php';
 
 function startsWith($haystack,$needle,$case=true)
 {
@@ -20,8 +21,7 @@ function endsWith($haystack,$needle,$case=true)
 
 function checkFilename($filename)
 {
-    $regex = ',[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-2][0-9]\.md,';
-    return filter_var($filename, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>$regex)));
+    return filter_var($filename, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>FILE_REGEX)));
 }
 
 function checkOrgan($organ) 
