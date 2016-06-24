@@ -23,4 +23,5 @@
 		<div id="menubar"> 
   			<a class="button" href="search.php" style="float:left;">Suchen</a>
 			<a class="button" href="invite.php" style="float:left;">Einladungen</a>
+			{include file='mainOrganSelector.tpl'}                                          
 		</div>
