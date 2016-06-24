@@ -20,7 +20,11 @@ body {width: 80%;
 	  margin-right:auto; }
 
 #menubar {
-	height: 1em;
+	justify-content: space-between;
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	padding-right: 0em;
 }
 
 .emailedit {
