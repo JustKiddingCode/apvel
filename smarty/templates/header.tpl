@@ -21,6 +21,7 @@
 
 		<h1>  <img src="/logos/asta.png"> Protokoll Veröffentlichungs und Editier Lösung </h1>
 		<div id="menubar"> 
-  			<a class="button" href="search.php" style="float:left;">Suchen</a>
-			<a class="button" href="invite.php" style="float:left;">Einladungen</a>
+  			<a class="button" href="search.php">Suchen</a>
+			<a class="button" href="invite.php">Einladungen</a>
+			{include file='mainOrganSelector.tpl'}                                          
 		</div>

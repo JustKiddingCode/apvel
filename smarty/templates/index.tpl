@@ -1,5 +1,4 @@
 {include file='header.tpl'}
-{include file='mainOrganSelector.tpl'}		
 
 {if isset($organ)}
 <h2>{$organs[$organ]}</h2>
