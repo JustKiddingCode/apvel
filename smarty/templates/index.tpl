@@ -39,10 +39,10 @@ Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Besc
 
 <h3>Veröffentlichte Protokolle </h3>
 <ol>
-	{foreach from=$pubRep item=arrrep}
+	{section loop=$pubRep name=ind max=10 start=$page*10}
 	<li> 
 		<ul>
-			{foreach from=$arrrep item=rep}
+			{foreach from=$pubRep[ind] item=rep}
 				<li><a href="reports/published/{$organ}/{$rep}">{$rep} </a> </li>
 			{/foreach}
 			{if $admin}
@@ -57,7 +57,7 @@ Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Besc
 			{/if}
 		</ul>
 	</li>
-	{/foreach}
+	{/section}
 </ol>
 
 <!-- end of if isset Organ -->
