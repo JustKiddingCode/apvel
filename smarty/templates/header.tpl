@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="EpicEditor/epiceditor/js/epiceditor.min.js" > </script>
 		<script type="text/javascript" src="script.js"> </script>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="icon" href="logo.png" />
 	</head>
 	<body>
 		<div id="login">
