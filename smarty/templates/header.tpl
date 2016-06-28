@@ -20,7 +20,7 @@
 		</div>
 
 		<h1>  <img src="/logos/asta.png"> Protokoll Veröffentlichungs und Editier Lösung </h1>
-		<div id="menubar"> 
+		<div class="menubar"> 
   			<a class="button" href="search.php">Suchen</a>
 			<a class="button" href="invite.php">Einladungen</a>
 			{include file='mainOrganSelector.tpl'}                                          

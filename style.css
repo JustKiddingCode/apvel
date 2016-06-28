@@ -10,19 +10,8 @@ body {width: 80%;
 	text-align:right; 
 }
 
-#lock {float:left; width: 33%; text-align:left; }
 
-#publishFrame {float:left;
-	    text-align:right;
-	    width:33%}
-
-#sendmail {float:left;
-	  width: 33%;
-	  text-align:center;
-	  margin-left:auto;
-	  margin-right:auto; }
-
-#menubar {
+.menubar {
 	justify-content: space-between;
 	display: flex;
 	align-items: flex-start;
