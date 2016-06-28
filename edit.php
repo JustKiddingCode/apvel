@@ -8,7 +8,7 @@ $handle = opendir(REPORTDIR);
 
 
 $smarty->assign('groups', $organs);
-$smarty->assign('file', 'edit.php');
+$smarty->assign('this', 'edit.php');
 
 
 if(isset($_GET['organ']) && checkOrgan($_GET['organ'])){ 

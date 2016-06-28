@@ -41,7 +41,7 @@ function getPublishedArray($folder, & $arr)
 
 
 $smarty->assign('organs', $organs); // include from permissions.config.php
-$smarty->assign('file', 'index.php');
+$smarty->assign('this', 'index.php');
 
 //post/get?
 if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){ 

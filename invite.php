@@ -18,6 +18,8 @@ $smarty->setConfigDir('smarty/configs');
 
 
 $smarty->assign('organs', $organs);
+$smarty->assign('this', 'invite.php');
+
 
 if (isset($_SESSION['user']) ) {
     $user = $_SESSION['user'];
