@@ -45,7 +45,7 @@ Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Besc
 				<li><a href="/reports/published/{$organ}/{$rep}">{$rep} </a> </li>
 			{/foreach}
 			{if $admin}
-				<li><a href="/withdraw/{$organ}/{$arrrep[0]}" class="button">Zurückziehen</a></li>
+				<li><a href="/withdraw/{$organ}/{$pubRep[ind][0]}" class="button">Zurückziehen</a></li>
 			{/if}
 		</ul>
 	</li>
