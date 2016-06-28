@@ -2,7 +2,7 @@
 <h2> Editing: {$organ} {$file} </h2>
     <br/>
 
-    <div>
+    <div class="menubar">
       <div id="lock">
 	<a class="button" href="javascript:refreshWritePermission('{$file}','{$organ}')">Get write permission</a>
       </div>
