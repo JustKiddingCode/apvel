@@ -12,11 +12,11 @@
 
       {if $admin}
         <div id="publishFrame" >
-  	  <a class="button" href="publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
+  	  <a class="button" href="/publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
         </div>
       {/if}
       {if $read}
-	  <a class="button" href="download.php?file={$file}&amp;organ={$organ}"> Download </a>
+	  <a class="button" href="/download.php?file={$file}&amp;organ={$organ}"> Download </a>
       {/if}
     </div>
     <br><span id="locktext"></span> <br>  <br> <br>  <br>
