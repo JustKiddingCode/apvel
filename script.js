@@ -21,7 +21,7 @@ var timer;
 	    }
           }
 	}
-	myAjax.open("GET", "getLock.php?organ=" + organ + "&file=" + file, true);
+	myAjax.open("GET", "/getLock.php?organ=" + organ + "&file=" + file, true);
 	myAjax.send();
       }
 
