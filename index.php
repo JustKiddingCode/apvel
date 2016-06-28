@@ -45,22 +45,22 @@ $smarty->assign('organs', $organs); // include from permissions.config.php
 
 //post/get?
 if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){ 
-    if (isset($_POST['withdraw'])) {
+    if (isset($_GET['withdraw'])) {
 	    if (checkOrgan($_GET['organ']) and checkAdminPerms($_GET['organ'])) {
 		$organ = $_GET['organ'];
-		$mdfile = substr($_POST['report'], 0, -5);
+		$mdfile = substr($_GET['report'], 0, -5);
 		if (checkFileName($mdfile)) {
-		    $mdpath = REPORTDIR.SUBPUBLISHED.$_POST['organ']."/" . $mdfile; 
+		    $mdpath = REPORTDIR.SUBPUBLISHED.$_GET['organ']."/" . $mdfile; 
 		}
 		$htmlpath = $mdpath.".html";
 		$pdfpath = $mdpath.".pdf";
 
-		rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_POST['organ'] . "/" . $mdfile);
+		rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_GET['organ'] . "/" . $mdfile);
 		unlink($htmlpath);
 		unlink($pdfpath);
 
 		//write Email:
-		$sub = "Protokoll zurueckgezogen : " . $_GET["organ"] . $_POST['report'];
+		$sub = "Protokoll zurueckgezogen : " . $_GET["organ"] . $_GET['report'];
 		rlyWriteEmail($emailFrom[$_GET['organ']], 'APVEL', $emailUN[$_GET['organ']], $sub, "Begruendung folgt gleich", array());
     	    }
      } else {
