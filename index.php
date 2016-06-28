@@ -47,8 +47,7 @@ $smarty->assign('organs', $organs); // include from permissions.config.php
 if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){ 
     if (isset($_GET['withdraw'])) {
 	    if (checkOrgan($_GET['organ']) and checkAdminPerms($_GET['organ'])) {
-		$organ = $_GET['organ'];
-		$mdfile = substr($_GET['report'], 0, -5);
+		$mdfile = $_GET['report'];
 		if (checkFileName($mdfile)) {
 		    $mdpath = REPORTDIR.SUBPUBLISHED.$_GET['organ']."/" . $mdfile; 
 		}
