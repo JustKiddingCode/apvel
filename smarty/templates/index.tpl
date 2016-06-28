@@ -23,7 +23,7 @@
 	<h3>Unveröffentlichte Protokolle </h3>
 	<ol>
 		{foreach from=$unPubRep item=rep}
-			<li><a href="edit.php?file={$rep}&amp;organ={$organ}">{$rep} </a></li>
+			<li><a href="/edit/{$organ}/{$rep}">{$rep} </a></li>
 		{/foreach}
 	</ol>
 {/if}

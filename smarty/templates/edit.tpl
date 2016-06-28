@@ -39,7 +39,7 @@
 
     <br/>
 
-    <form action="edit.php?organ={$organ}&amp;file={$file}" method="POST">
+    <form action="/edit/{$organ}/{$file}" method="POST">
       <button type="submit" id="submitbutton" style="visibility:hidden;">Ändern</button>
       <input type="text"  name="organ" value="{$organ}" style="visibility:hidden;">
       <input type="text"  name="file" value="{$file}" style="visibility:hidden;">
