@@ -34,8 +34,17 @@ if(isset($_GET['file']) && isset($_GET['organ'])) {
                 rename($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
 
                 //write email
-                writeEmail($organ, $_GET['file'], SUBPUBLISHED, array( REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . ".pdf"));
-            
+		$text = file_get_contents(REPORTDIR . $_GET['organ'] . ".email") . $text;
+		
+		$to = $emailPub[$_GET['organ']];
+		$from = $emailFrom[_GET['organ']];
+		$sub = "Protokoll veröffentlicht: ". $_GET['organ'] . ' ' . $_GET['file'];
+		$attach = array(
+			REPORTDIR . SUBPUBLISHED . $_GET['organ'] . "/" . $_GET['file'], 
+			REPORTDIR . SUBPUBLISHED . $_GET['organ'] . "/" . $_GET['file'] . ".pdf");
+
+		rlyWriteEmail($from,"APVEL",$to,$sub,$text, $attach);
+
                 //resolution collection
                 $conclusions = array();
                 preg_match_all(";\[beschluss\](.*?)\[/beschluss\];s", $text, $conclusions);
