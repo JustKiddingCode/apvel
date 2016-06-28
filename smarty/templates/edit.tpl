@@ -50,7 +50,7 @@
 
     <script type="text/javascript">
       var opts = {
-        basePath: 'EpicEditor/epiceditor',
+        basePath: '/EpicEditor/epiceditor',
         textarea: 'epicedit',
         autogrow: true,
         clientSideStorage: false,
