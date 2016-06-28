@@ -11,6 +11,8 @@ function remove_intern_tags($text){
 }
 
 
+$smarty->assign('file', 'publish.php');
+
 if(isset($_GET['file']) && isset($_GET['organ'])) {
     if (checkOrgan($_GET['organ']) && 
         checkFilename($_GET['file']) &&
