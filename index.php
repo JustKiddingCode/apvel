@@ -46,11 +46,12 @@ $smarty->assign('this', 'index.php');
 //post/get?
 if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){ 
     if (isset($_GET['withdraw'])) {
-	    if (checkOrgan($_GET['organ']) and checkAdminPerms($_GET['organ'])) {
+	    if (checkOrgan($_GET['organ']) &&
+	   	 checkAdminPerms($_GET['organ']) &&
+		 checkFilename($_GET['report'])) {
+		
 		$mdfile = $_GET['report'];
-		if (checkFileName($mdfile)) {
-		    $mdpath = REPORTDIR.SUBPUBLISHED.$_GET['organ']."/" . $mdfile; 
-		}
+		$mdpath = REPORTDIR.SUBPUBLISHED.$_GET['organ']."/" . $mdfile; 
 		$htmlpath = $mdpath.".html";
 		$pdfpath = $mdpath.".pdf";
 
