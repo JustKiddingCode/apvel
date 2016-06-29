@@ -1,13 +1,15 @@
 <?php
+session_start();
+
 require 'defines.php';
 require 'lib.php';
 
 if(isset($_POST["organ"]) && isset($_POST["date"])) {
-    if (filter_var($_POST['date'], FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>DATEREGEX)))) {
-        $date = explode("/", $_POST['date']);
-        if (! checkOrgan($_POST["organ"])) { //sanitize _POST
-            die("Invalid Organ!");
-        }
+    if (checkOrgan($_POST["organ"]) && 
+    	checkWritePerms($_POST["organ"]) &&
+    	checkDateRegex($_POST['date'])) {
+	
+	$date = explode("/", $_POST['date']);
         $filename = $date[0] . "-" . $date[1] . "-" . $date[2] . ".md";
         $filenamePub = REPORTDIR . SUBPUBLISHED . $_POST['organ'] . "/" . $date[0] . "-" . $date[1] . "-" . $date[2] . ".md";
 
