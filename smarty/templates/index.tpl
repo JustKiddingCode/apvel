@@ -50,6 +50,9 @@ Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Besc
 		</ul>
 	</li>
 	{/section}
+	{if @count($pubRep) >= ($page+1)*10}
+		<a href="/index.php?organ={$organ}&page={$page+1}">Nächste Seite</a>
+	{/if}
 </ol>
 
 <!-- end of if isset Organ -->
