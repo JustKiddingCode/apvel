@@ -38,6 +38,9 @@ if (isset($_SESSION['user'])) {
             if(startsWith($line, $_POST['user'])) {
                 // do the auth
                 $lineExplode = explode(":", $line);
+		if($lineExplode[0] != $_POST['user']) {
+			continue;
+		}
                 $cHash = new PassHash();
                 if ($cHash->verify_hash($_POST['password'], $lineExplode[1])) {
                     $_SESSION['user'] = $_POST['user'];
