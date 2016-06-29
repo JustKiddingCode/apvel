@@ -72,9 +72,11 @@ if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){
         //show unpublished reports
         $folderPub = REPORTDIR . SUBPUBLISHED. $_GET['organ'] . '/';
         $folderUnPub = REPORTDIR . SUBUNPUBLISHED. $_GET['organ'] . '/';
-        if (! is_dir($folderPub)) { die("Wrong folder structure: " . $folderPub); 
+        if (! is_dir($folderPub)) { 
+		die("Wrong folder structure: " . $folderPub); 
         }
-        if (! is_dir($folderUnPub)) { die("Wrong folder structure: " . $folderUnPub); 
+        if (! is_dir($folderUnPub)) { 
+		die("Wrong folder structure: " . $folderUnPub); 
         }
 
         $unpublishedReports = array();
@@ -85,7 +87,7 @@ if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){
         sort($unpublishedReports);
 
    	if(isset($_GET['page'])) {
-		$_GET['page'] = (int) $_GET['page'];
+		$_GET['page'] = int_val($_GET['page']);
 	} else {
 		$_GET['page'] = 0;
 	}
