@@ -50,10 +50,10 @@ Um zu überprüfen, ob etwas entschieden worden ist, kannst du schnell alle Besc
 		</ul>
 	</li>
 	{/section}
+	{if $page > 0}
+		<a href="/index/{$organ}/{$page-1}"> Vorherige Seite</a>
+	{/if}
 	{if $pubRep|count >= ($page+1)*10}
-		{if $page > 0}
-			<a href="/index/{$organ}/{$page-1}"> Vorherige Seite</a>
-		{/if}
 		<a href="/index/{$organ}/{$page+1}">Nächste Seite</a>
 	{/if}
 </ol>
