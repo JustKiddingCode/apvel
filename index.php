@@ -87,7 +87,7 @@ if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){
         sort($unpublishedReports);
 
    	if(isset($_GET['page'])) {
-		$_GET['page'] = int_val($_GET['page']);
+		$_GET['page'] = intval($_GET['page']);
 	} else {
 		$_GET['page'] = 0;
 	}
