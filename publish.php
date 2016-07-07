@@ -11,6 +11,8 @@ function remove_intern_tags($text){
 }
 
 
+$smarty->assign('this', 'publish.php');
+
 if(isset($_GET['file']) && isset($_GET['organ'])) {
     if (checkOrgan($_GET['organ']) && 
         checkFilename($_GET['file']) &&
@@ -29,13 +31,8 @@ if(isset($_GET['file']) && isset($_GET['organ'])) {
                 pandocToHTML($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'].".html");
                 pandocToPDF($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . ".pdf");
         
-                file_put_contents($path, $text); //removes intern tags
-                //move markdown file
-                rename($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
+	
 
-                //write email
-                writeEmail($organ, $_GET['file'], SUBPUBLISHED, array( REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . ".pdf"));
-            
                 //resolution collection
                 $conclusions = array();
                 preg_match_all(";\[beschluss\](.*?)\[/beschluss\];s", $text, $conclusions);
@@ -43,6 +40,29 @@ if(isset($_GET['file']) && isset($_GET['organ'])) {
                     $str = substr($con, 11, -12);
                     file_put_contents(REPORTDIR . SUBPUBLISHED . $_GET['organ'] . ".resolutions.txt", $_GET['file'] . ": ".$str . "\n", FILE_APPEND);
                 }
+
+		// remove "[beschluss]" tags
+		str_replace("[beschluss]","",$text);
+		str_replace("[/beschluss]", "", $text);
+		
+
+
+                file_put_contents($path, $text); //removes intern tags
+
+                //move markdown file
+                rename($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
+
+                //write email
+		$text = file_get_contents(REPORTDIR . $_GET['organ'] . ".email") . $text;
+		
+		$to = $emailPub[$_GET['organ']];
+		$from = $emailFrom[_GET['organ']];
+		$sub = "Protokoll veröffentlicht: ". $_GET['organ'] . ' ' . $_GET['file'];
+		$attach = array(
+			REPORTDIR . SUBPUBLISHED . $_GET['organ'] . "/" . $_GET['file'], 
+			REPORTDIR . SUBPUBLISHED . $_GET['organ'] . "/" . $_GET['file'] . ".pdf");
+
+		rlyWriteEmail($from,"APVEL",$to,$sub,$text, $attach);
                 header('Location: index.php');
                 exit();
             } else {

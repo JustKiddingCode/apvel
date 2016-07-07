@@ -41,40 +41,42 @@ function getPublishedArray($folder, & $arr)
 
 
 $smarty->assign('organs', $organs); // include from permissions.config.php
-
+$smarty->assign('this', 'index.php');
 
 //post/get?
-if (isset($_POST['organ']) && checkOrgan($_POST['organ'])){ 
-    if (isset($_POST['withdraw'])) {
-	    if (checkOrgan($_POST['organ']) and checkAdminPerms($_POST['organ'])) {
-		$organ = $_POST['organ'];
-		$mdfile = substr($_POST['report'], 0, -5);
-		if (checkFileName($mdfile)) {
-		    $mdpath = REPORTDIR.SUBPUBLISHED.$_POST['organ']."/" . $mdfile; 
-		}
+if (isset($_GET['organ']) && checkOrgan($_GET['organ'])){ 
+    if (isset($_GET['withdraw'])) {
+	    if (checkOrgan($_GET['organ']) &&
+	   	 checkAdminPerms($_GET['organ']) &&
+		 checkFilename($_GET['report'])) {
+		
+		$mdfile = $_GET['report'];
+		$mdpath = REPORTDIR.SUBPUBLISHED.$_GET['organ']."/" . $mdfile; 
 		$htmlpath = $mdpath.".html";
 		$pdfpath = $mdpath.".pdf";
 
-		rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_POST['organ'] . "/" . $mdfile);
+		rename($mdpath, REPORTDIR . SUBUNPUBLISHED.  $_GET['organ'] . "/" . $mdfile);
 		unlink($htmlpath);
 		unlink($pdfpath);
 
 		//write Email:
-		$sub = "Protokoll zurueckgezogen : " . $_POST["organ"] . $_POST['report'];
-		rlyWriteEmail($emailFrom[$_POST['organ']], 'APVEL', $emailUN[$_POST['organ']], $sub, "Begruendung folgt gleich", array());
+		$sub = "Protokoll zurueckgezogen : " . $_GET["organ"] . $_GET['report'];
+		rlyWriteEmail($emailFrom[$_GET['organ']], 'APVEL', $emailUN[$_GET['organ']], $sub, "Begruendung folgt gleich", array());
     	    }
      } else {
         //show unpublished reports?
-        $smarty->assign("read", checkReadPerms($_POST['organ']));
-        $smarty->assign("write", checkWritePerms($_POST['organ']));
-        $smarty->assign("admin", checkAdminPerms($_POST['organ']));
+        $smarty->assign("read", checkReadPerms($_GET['organ']));
+        $smarty->assign("write", checkWritePerms($_GET['organ']));
+        $smarty->assign("admin", checkAdminPerms($_GET['organ']));
 
         //show unpublished reports
-        $folderPub = REPORTDIR . SUBPUBLISHED. $_POST['organ'] . '/';
-        $folderUnPub = REPORTDIR . SUBUNPUBLISHED. $_POST['organ'] . '/';
-        if (! is_dir($folderPub)) { die("Wrong folder structure: " . $folderPub); 
+        $folderPub = REPORTDIR . SUBPUBLISHED. $_GET['organ'] . '/';
+        $folderUnPub = REPORTDIR . SUBUNPUBLISHED. $_GET['organ'] . '/';
+        if (! is_dir($folderPub)) { 
+		die("Wrong folder structure: " . $folderPub); 
         }
-        if (! is_dir($folderUnPub)) { die("Wrong folder structure: " . $folderUnPub); 
+        if (! is_dir($folderUnPub)) { 
+		die("Wrong folder structure: " . $folderUnPub); 
         }
 
         $unpublishedReports = array();
@@ -85,11 +87,11 @@ if (isset($_POST['organ']) && checkOrgan($_POST['organ'])){
         sort($unpublishedReports);
 
    	if(isset($_GET['page'])) {
-		$_GET['page'] = (int) $_GET['page'];
+		$_GET['page'] = int_val($_GET['page']);
 	} else {
 		$_GET['page'] = 0;
 	}
-        $smarty->assign('organ', $_POST['organ']);
+        $smarty->assign('organ', $_GET['organ']);
         $smarty->assign('unPubRep', $unpublishedReports);
 	$smarty->assign('page', $_GET['page']);
         $smarty->assign('pubRep', $publishedReports);

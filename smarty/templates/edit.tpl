@@ -7,16 +7,16 @@
 	<a class="button" href="javascript:refreshWritePermission('{$file}','{$organ}')">Get write permission</a>
       </div>
       <div id="sendmail" >
-	<a id="sendmailbutton" class="button" href="sendmail.php?file={$file}&amp;organ={$organ}">Send email</a>
+	<a id="sendmailbutton" class="button" href="/sendmail.php?file={$file}&amp;organ={$organ}">Send email</a>
       </div>
 
       {if $admin}
         <div id="publishFrame" >
-  	  <a class="button" href="publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
+  	  <a class="button" href="/publish.php?file={$file}&amp;organ={$organ}" id="publish"> Publish (preview) </a>
         </div>
       {/if}
       {if $read}
-	  <a class="button" href="download.php?file={$file}&amp;organ={$organ}"> Download </a>
+	  <a class="button" href="/download.php?file={$file}&amp;organ={$organ}"> Download </a>
       {/if}
     </div>
     <br><span id="locktext"></span> <br>  <br> <br>  <br>
@@ -39,7 +39,7 @@
 
     <br/>
 
-    <form action="edit.php?organ={$organ}&amp;file={$file}" method="POST">
+    <form action="/edit/{$organ}/{$file}" method="POST">
       <button type="submit" id="submitbutton" style="visibility:hidden;">Ändern</button>
       <input type="text"  name="organ" value="{$organ}" style="visibility:hidden;">
       <input type="text"  name="file" value="{$file}" style="visibility:hidden;">
@@ -50,7 +50,7 @@
 
     <script type="text/javascript">
       var opts = {
-        basePath: 'EpicEditor/epiceditor',
+        basePath: '/EpicEditor/epiceditor',
         textarea: 'epicedit',
         autogrow: true,
         clientSideStorage: false,

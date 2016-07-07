@@ -24,6 +24,10 @@ function checkFilename($filename)
     return filter_var($filename, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>FILE_REGEX)));
 }
 
+function checkDateRegex($d){
+	return filter_var($d, FILTER_VALIDATE_REGEXP, array("options" => array("regexp"=>DATEREGEX)));
+}
+
 function checkOrgan($organ) 
 {
     global $organs;
