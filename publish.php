@@ -31,7 +31,24 @@ if(isset($_GET['file']) && isset($_GET['organ'])) {
                 pandocToHTML($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'].".html");
                 pandocToPDF($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file'] . ".pdf");
         
+	
+
+                //resolution collection
+                $conclusions = array();
+                preg_match_all(";\[beschluss\](.*?)\[/beschluss\];s", $text, $conclusions);
+                foreach($conclusions[0] as $key => $con) {
+                    $str = substr($con, 11, -12);
+                    file_put_contents(REPORTDIR . SUBPUBLISHED . $_GET['organ'] . ".resolutions.txt", $_GET['file'] . ": ".$str . "\n", FILE_APPEND);
+                }
+
+		// remove "[beschluss]" tags
+		str_replace("[beschluss]","",$text);
+		str_replace("[/beschluss]", "", $text);
+		
+
+
                 file_put_contents($path, $text); //removes intern tags
+
                 //move markdown file
                 rename($path, REPORTDIR . SUBPUBLISHED.  $_GET['organ'] . "/" . $_GET['file']);
 
@@ -46,14 +63,6 @@ if(isset($_GET['file']) && isset($_GET['organ'])) {
 			REPORTDIR . SUBPUBLISHED . $_GET['organ'] . "/" . $_GET['file'] . ".pdf");
 
 		rlyWriteEmail($from,"APVEL",$to,$sub,$text, $attach);
-
-                //resolution collection
-                $conclusions = array();
-                preg_match_all(";\[beschluss\](.*?)\[/beschluss\];s", $text, $conclusions);
-                foreach($conclusions[0] as $key => $con) {
-                    $str = substr($con, 11, -12);
-                    file_put_contents(REPORTDIR . SUBPUBLISHED . $_GET['organ'] . ".resolutions.txt", $_GET['file'] . ": ".$str . "\n", FILE_APPEND);
-                }
                 header('Location: index.php');
                 exit();
             } else {
