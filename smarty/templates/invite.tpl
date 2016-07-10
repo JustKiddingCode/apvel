@@ -3,8 +3,7 @@
     {if isset($organ)}<h2>{$organs[$organ]}</h2>
       {if $admin}
 	<h3>Einladung verschicken</h3>
-	<form action="invite.php" method="POST">
-	  <input type="text" name="organ" value="{$organ}" style="visibility:hidden;width:0em;">
+	<form action="/invite/{$organ}" method="POST">
           <textarea name="mailtext" class="emailedit"></textarea>
 	  <button type="submit" >Einladung verschicken</button>
 	</form>
