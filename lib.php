@@ -116,13 +116,13 @@ function readFromFile($organ, $file)
 
 function pandocToHTML($src, $to)
 {
-    $cmd = "PATH=/usr/bin pandoc ". $src . " -f markdown -t html -s -o " . $to;
+    $cmd = "sed 's,/logos/,logos/,' " . $src . " | PATH=/usr/bin pandoc -f markdown -t html -o " . $to;
     exec($cmd);
 }
 
 function pandocToPDF($src, $to)
 {
-    $cmd = "PATH=/usr/bin pandoc ". $src . " -f markdown -o " . $to;
+    $cmd = "sed 's,/logos/,logos/,' " . $src . " | PATH=/usr/bin pandoc -V geometry:margin=3cm -f markdown -o " . $to;
     exec($cmd);
 }
 
