@@ -201,6 +201,7 @@ function checkLock($user, $organ, $file)
 
 function createLock($user, $organ, $file, $timeoffset = 900) 
 {
+    if (! checkWritePerms() ) return false;
     $time = time() + $timeoffset;
     $filename =REPORTDIR . SUBUNPUBLISHED . $organ . "/" . $file . ".lock";
     $file = fopen($filename, "w") or die("File error");
