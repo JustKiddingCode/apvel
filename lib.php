@@ -102,7 +102,7 @@ function writeIntoFile($text, $organ, $file, $user='')
         fwrite($file, $text);
         fclose($file);
 		  if (GIT) {
-		  		$git_add = "git add " $path;
+		  		$git_add = "git add $path";
 				$git_cm  = "git commit -m \"changes to $file ($organ) by $user\"";
 				exec($git_add);
 				exec($git_cm);
