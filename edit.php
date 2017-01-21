@@ -44,7 +44,7 @@ if(! isset($_POST['text']) && isset($_GET['file']) && isset($_GET['organ'])) { /
 if(isset($_POST['text']) and isset($_GET['organ']) and isset($_GET['file'])) { //save changes
     if (checkOrgan($_GET['organ']) and checkWritePerms($_GET['organ'])) {
         if(checkFilename($_GET['file']) and checkLock($_SESSION['user'], $_GET['organ'], $_GET['file'])) {
-            writeIntoFile($_POST['text'], $_GET['organ'], $_GET['file']);
+            writeIntoFile($_POST['text'], $_GET['organ'], $_GET['file'], $_SESSION['user']);
             $smarty->assign('text', $_POST['text']);
             $smarty->assign('organ', $_GET['organ']);
             $smarty->assign('file', $_GET['file']);

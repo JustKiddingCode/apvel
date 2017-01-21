@@ -94,13 +94,20 @@ function writeEmailTemplate($text, $organ)
 }
 
 
-function writeIntoFile($text, $organ, $file) 
+function writeIntoFile($text, $organ, $file, $user='') 
 {
     $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
     if (is_file($path)) {
         $file = fopen($path, "w") or die("File error");
         fwrite($file, $text);
         fclose($file);
+		  if (GIT) {
+		  		$git_add = "git add " $path;
+				$git_cm  = "git commit -m \"changes to $file ($organ) by $user\"";
+				exec($git_add);
+				exec($git_cm);
+
+		  }
     }
 }
 
