@@ -6,4 +6,7 @@ define('SUBPUBLISHED', 'published/');
 define('DATEREGEX', ',[0-9][0-9][0-9][0-9]/[0-1][0-9]/[0-3][0-9],');
 define('INTERN_REGEX', ';\[intern\](.*?)\[/intern\];s');
 define('FILE_REGEX', ',[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]\.md,');
+
+define('GIT', true);
+
 ?>

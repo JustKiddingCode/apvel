@@ -53,7 +53,7 @@
         basePath: '/EpicEditor/epiceditor',
         textarea: 'epicedit',
         autogrow: true,
-        clientSideStorage: false,
+        clientSideStorage: true,
         file: {
 	  name:'{$organ}{$file}'
         }

@@ -94,13 +94,20 @@ function writeEmailTemplate($text, $organ)
 }
 
 
-function writeIntoFile($text, $organ, $file) 
+function writeIntoFile($text, $organ, $file, $user='') 
 {
     $path = REPORTDIR . SUBUNPUBLISHED . $organ . '/' . $file ;
     if (is_file($path)) {
         $file = fopen($path, "w") or die("File error");
         fwrite($file, $text);
         fclose($file);
+		  if (GIT) {
+		  		$git_add = "cd reports; git add " . substr($path, 8);
+				$git_cm  = "cd reports; git commit -m \"changes to $organ by $user\"";
+				exec($git_add);
+				exec($git_cm);
+
+		  }
     }
 }
 
@@ -201,6 +208,7 @@ function checkLock($user, $organ, $file)
 
 function createLock($user, $organ, $file, $timeoffset = 900) 
 {
+    if (! checkWritePerms($organ) ) return false;
     $time = time() + $timeoffset;
     $filename =REPORTDIR . SUBUNPUBLISHED . $organ . "/" . $file . ".lock";
     $file = fopen($filename, "w") or die("File error");
