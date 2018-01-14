@@ -44,7 +44,7 @@ if(isset($_GET['organ'])) {
             $add .= file_get_contents($file);
             file_put_contents($file, $add);
 
-            rlyWriteEMail($emailFrom[$_GET['organ']], "APVEL Protokollsystem", $emailUN[$_GET['organ']], "Einladung zur nächsten Sitzung  " . $organs[$_GET['organ']], $_POST['mailtext'], array());
+            rlyWriteEMail($emailFrom[$_GET['organ']], "APVEL Protokollsystem", $emailInvite[$_GET['organ']], "Einladung zur nächsten Sitzung  " . $organs[$_GET['organ']], $_POST['mailtext'], array());
         }
         // get text
         $lastInvite = "";
