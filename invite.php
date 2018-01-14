@@ -29,22 +29,22 @@ $smarty->assign("user", $user);
 
 
 
-if(isset($_GET['organ'])) {
-    if (checkOrgan($_GET['organ'])) { //input validation
-        $smarty->assign("read", checkReadPerms($_GET['organ']));
-        $smarty->assign("write", checkWritePerms($_GET['organ']));
-        $smarty->assign("admin", checkAdminPerms($_GET['organ']));
-        $smarty->assign("organ", $_GET['organ']);    
+if(isset($_POST['organ'])) {
+    if (checkOrgan($_POST['organ'])) { //input validation
+        $smarty->assign("read", checkReadPerms($_POST['organ']));
+        $smarty->assign("write", checkWritePerms($_POST['organ']));
+        $smarty->assign("admin", checkAdminPerms($_POST['organ']));
+        $smarty->assign("organ", $_POST['organ']);    
         
-        $file = REPORTDIR . "/" . $_GET['organ'] . ".invitations.txt";
+        $file = REPORTDIR . "/" . $_POST['organ'] . ".invitations.txt";
         //only admin is allowed to invite
-        if (checkAdminPerms($_GET['organ']) && isset($_POST['mailtext'])) {
+        if (checkAdminPerms($_POST['organ']) && isset($_POST['mailtext'])) {
             // append to report dir / $organ.invitation
             $add = $_POST['mailtext'] . "\n====End of Invitation====\n";
             $add .= file_get_contents($file);
             file_put_contents($file, $add);
 
-            rlyWriteEMail($emailFrom[$_GET['organ']], "APVEL Protokollsystem", $emailInvite[$_GET['organ']], "Einladung zur nächsten Sitzung  " . $organs[$_GET['organ']], $_POST['mailtext'], array());
+            rlyWriteEMail($emailFrom[$_POST['organ']], "APVEL Protokollsystem", $emailInvite[$_POST['organ']], "Einladung zur nächsten Sitzung  " . $organs[$_POST['organ']], $_POST['mailtext'], array());
         }
         // get text
         $lastInvite = "";
